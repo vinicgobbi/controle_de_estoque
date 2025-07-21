@@ -9,7 +9,7 @@ class ProdutoController extends Controller
 {
     public function index()
     {
-        return view('Produto.index');
+        return view('material.index');
     }
 
     // GET
@@ -28,8 +28,8 @@ class ProdutoController extends Controller
             'DESC_PROD'      => 'nullable|string|max:255',
             'QUANT_PROD'     => 'nullable|integer|min:0',
             'QUANT_MIN_PROD' => 'nullable|integer|min:0',
-            'CATEGORIA_ID'   => 'nullable|integer|exists:CATEGORIA,ID',
-            'GRUPO_ID'       => 'nullable|integer|exists:GRUPO,ID',
+            'CATEGORIA_ID'   => 'nullable|integer|exists:ESTOQUE_MED_CATEGORIA,ID',
+            'GRUPO_ID'       => 'nullable|integer|exists:ESTOQUE_MED_GRUPO,ID',
         ]);
 
         // Cria o produto com os dados validados
@@ -42,10 +42,38 @@ class ProdutoController extends Controller
         ], 201);
     }
 
-    public function updateProduto()
+    public function updateProduto(Request $request, $id)
     {
+        // Validação dos dados
+        $validated = $request->validate([
+            'COD_PROD'       => 'required|string|max:50',
+            'ALMOX_PROD'     => 'nullable|string|max:50',
+            'DESC_PROD'      => 'nullable|string|max:255',
+            'QUANT_PROD'     => 'nullable|integer|min:0',
+            'QUANT_MIN_PROD' => 'nullable|integer|min:0',
+            'CATEGORIA_ID'   => 'nullable|integer|exists:ESTOQUE_MED_CATEGORIA,ID',
+            'GRUPO_ID'       => 'nullable|integer|exists:ESTOQUE_MED_GRUPO,ID',
+        ]);
 
+        // Busca o produto pelo ID
+        $produto = EstoqueMedProduto::findOrFail($id);
+
+        // Atualiza com os dados validados
+        $produto->update($validated);
+
+        // Retorna resposta
+        return response()->json([
+            'message' => 'Produto atualizado com sucesso',
+            'produto' => $produto
+        ]);
     }
+
+    public function edit($id)
+    {
+        $produto = EstoqueMedProduto::findOrFail($id);
+        return view('edita_produto', compact('produto'));
+    }
+
 
     public function deleteProduto()
     {

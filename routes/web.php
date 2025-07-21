@@ -16,5 +16,6 @@ Route::get('/grupos', [GrupoController::class, 'getGrupo'])->name('grupos');
 Route::get('/criar-produto', function () {
 	return view('criar_produto');
 });
-
 Route::post('/criar-produto/criar', [ProdutoController::class, 'createProduto'])->name('criar-produto');
+Route::put('/produtos/{id}', [ProdutoController::class, 'updateProduto'])->name('update-produto');
+Route::get('/produtos/{id}/edit', [ProdutoController::class, 'edit'])->name('edit');
