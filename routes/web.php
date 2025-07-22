@@ -3,19 +3,23 @@
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\GrupoController;
 use App\Http\Controllers\ProdutoController;
+use App\Models\EstoqueMedCategoria;
+use App\Models\EstoqueMedGrupo;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ProdutoController::class, 'index'])->name('index');
 
-Route::get('/index', [ProdutoController::class, 'show'])->name('show');
+Route::get('/show', [ProdutoController::class, 'getProduto'])->name('show');
 
 Route::get('/categorias', [CategoriaController::class, 'getCategoria'])->name('categorias');
 
 Route::get('/grupos', [GrupoController::class, 'getGrupo'])->name('grupos');
 
-Route::get('/criar-produto', function () {
-	return view('criar_produto');
-});
-Route::post('/criar-produto/criar', [ProdutoController::class, 'createProduto'])->name('criar-produto');
-Route::put('/produtos/{id}', [ProdutoController::class, 'updateProduto'])->name('update-produto');
-Route::get('/produtos/{id}/edit', [ProdutoController::class, 'edit'])->name('edit');
+Route::get('/criar-produto', function () { //retorna a view de criar produto
+	$categorias = EstoqueMedCategoria::all();
+    $grupos = EstoqueMedGrupo::all();
+	return view('criar_produto', compact('categorias', 'grupos'));
+})->name('criar-produto');
+Route::post('/criar-produto/criar', [ProdutoController::class, 'createProduto'])->name('create-produto'); // URL que cria um produto e salva no banco
+Route::put('/produtos/{id}', [ProdutoController::class, 'updateProduto'])->name('update-produto'); // URL para editar o produto no banco
+Route::get('/produtos/{id}/editar', [ProdutoController::class, 'edit'])->name('edit'); // URL que retorna a View para realizar edição
