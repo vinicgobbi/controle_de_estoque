@@ -114,7 +114,7 @@
 
         <!-- LISTAGEM DE PRODUTOS -->
         <li class="list-group-item rounded-1 p-0 overflow-hidden ">
-            <a href="/psicologia" class="link-agendar d-flex align-items-center gap-2 p-2">
+            <a href="{{ route('index') }}" class="link-agendar d-flex align-items-center gap-2 p-2">
                 <i class="fas fa-home"></i> Listagem de Produtos
             </a>
         </li>
@@ -122,7 +122,7 @@
 
         <!-- CRIAR UM PRODUTO -->
         <li class="list-group-item rounded-1 p-0 overflow-hidden ">
-            <a href="/psicologia/criar-agendamento" class="link-agendar d-flex align-items-center gap-2 p-2">
+            <a href="{{ route('criar-produto') }}" class="link-agendar d-flex align-items-center gap-2 p-2">
                 <i class="fas fa-calendar-plus"></i> Cadastro de produto
             </a>
         </li>
@@ -138,7 +138,7 @@
 
         <!-- CADASTRAR CATEGORIA -->
         <li class="list-group-item rounded-1 p-0 overflow-hidden ">
-            <a href="/psicologia/criar-paciente" class="link-agendar d-flex align-items-center gap-2 p-2">
+            <a href="" class="link-agendar d-flex align-items-center gap-2 p-2">
                 <i class="fas fa-user-plus"></i> Cadastro de Categoria
             </a>
         </li>
@@ -146,7 +146,7 @@
         
         <!-- CADASTRO  -->
         <li class="list-group-item rounded-1 p-0 overflow-hidden ">
-            <a href="/psicologia/consultar-paciente" class="link-agendar d-flex align-items-center gap-2 p-2">
+            <a href="" class="link-agendar d-flex align-items-center gap-2 p-2">
                 <i class="fas fa-users"></i> Cadastro de Grupo
             </a>
         </li>
