@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EstoqueMedCategoria;
+use App\Models\EstoqueMedGrupo;
 use Illuminate\Http\Request;
 use App\Models\EstoqueMedProduto;
 
@@ -9,11 +11,12 @@ class ProdutoController extends Controller
 {
     public function index()
     {
-        return view('material.index');
+        $data = EstoqueMedProduto::all();
+        return view('get_produto', compact('data'));
     }
 
     // GET
-    public function show()
+    public function getProduto()
     {
         return EstoqueMedProduto::all();
     }
@@ -24,12 +27,20 @@ class ProdutoController extends Controller
         // Validação simples dos dados recebidos
         $validated = $request->validate([
             'COD_PROD'       => 'required|string|max:50',
-            'ALMOX_PROD'     => 'nullable|string|max:50',
-            'DESC_PROD'      => 'nullable|string|max:255',
-            'QUANT_PROD'     => 'nullable|integer|min:0',
+            'ALMOX_PROD'     => 'required|string|max:50',
+            'DESC_PROD'      => 'required|string|max:255',
+            'QUANT_PROD'     => 'required|integer|min:0',
             'QUANT_MIN_PROD' => 'nullable|integer|min:0',
-            'CATEGORIA_ID'   => 'nullable|integer|exists:ESTOQUE_MED_CATEGORIA,ID',
-            'GRUPO_ID'       => 'nullable|integer|exists:ESTOQUE_MED_GRUPO,ID',
+            'CATEGORIA_ID'   => 'required|integer|exists:ESTOQUE_MED_CATEGORIA,ID',
+            'GRUPO_ID'       => 'required|integer|exists:ESTOQUE_MED_GRUPO,ID',
+        ],
+        [
+            'COD_PROD.required' => 'Digite o código do produto antes de continuar',
+            'ALMOX_PROD.required' => 'Informe em qual almoxarifado o produto vai estar antes de continuar',
+            'DESC_PROD.required' => 'Informe a descrição do Produto antes de continuar',
+            'QUANT_PROD.required' => 'Digite a quantidade do Produto antes de continuar',
+            'CATEGORIA_ID.required' => 'Defina um categoria antes de continuar',
+            'GRUPO_ID.required' => 'Defina um grupo antes de continuar',
         ]);
 
         // Cria o produto com os dados validados
@@ -61,17 +72,15 @@ class ProdutoController extends Controller
         // Atualiza com os dados validados
         $produto->update($validated);
 
-        // Retorna resposta
-        return response()->json([
-            'message' => 'Produto atualizado com sucesso',
-            'produto' => $produto
-        ]);
+        return redirect()->route('index');
     }
 
     public function edit($id)
     {
         $produto = EstoqueMedProduto::findOrFail($id);
-        return view('edita_produto', compact('produto'));
+        $categorias = EstoqueMedCategoria::all();
+        $grupos = EstoqueMedGrupo::all();
+        return view('edita_produto', compact('produto', 'categorias', 'grupos'));
     }
 
 
