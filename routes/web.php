@@ -27,3 +27,4 @@ Route::post('/criar-produto/criar', [ProdutoController::class, 'createProduto'])
 Route::put('/produtos/{id}', [ProdutoController::class, 'updateProduto'])->name('update-produto'); // URL para editar o produto no banco
 Route::get('/produtos/{id}/editar', [ProdutoController::class, 'edit'])->name('edit'); // URL que retorna a View para realizar edição
 
+Route::get('/categoria', [CategoriaController::class, 'getCategoria'])->name('get-categoria');

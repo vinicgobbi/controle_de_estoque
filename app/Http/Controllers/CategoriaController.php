@@ -8,6 +8,7 @@ class CategoriaController extends Controller
 {
     public function getCategoria()
     {
-        return EstoqueCategoria::all();
+        $categorias = EstoqueCategoria::all();
+        return view('get_categoria', compact('categorias'));
     }
 }
