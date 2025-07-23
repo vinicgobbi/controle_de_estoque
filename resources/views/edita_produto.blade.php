@@ -31,92 +31,99 @@
                     </div>
                 @endif
 
-                <form action="{{ url('/produtos/' . $produto->ID) }}" method="POST" class="row g-3">
+                <form action="{{ route('update-produto', $produto->id) }}" method="POST" class="row g-3">
                     @csrf
                     @method('PUT')
 
-                    <div class="col-md-6">
-                        <label for="COD_PROD" class="form-label">Código do Produto *</label>
+                    <div class="col-md-4">
+                        <label for="nome_prod" class="form-label">Nome do Produto</label>
                         <input
                             type="text"
                             class="form-control"
-                            id="COD_PROD"
-                            name="COD_PROD"
-                            value="{{ old('COD_PROD', $produto->COD_PROD) }}"
-                            required
-                            maxlength="50"
+                            id="nome_prod"
+                            name="nome_prod"
+                            value="{{ old('nome_prod', $produto->nome_prod) }}"
                         >
-                    </div>
+                    </div>                    
 
                     <div class="col-md-6">
-                        <label for="ALMOX_PROD" class="form-label">Almoxarifado</label>
+                        <label for="almox_id" class="form-label">Almoxarifado</label>
+                        <select id="almox_id" name="almox_id" class="form-select" required>
+                            <option value="">Selecione...</option>
+                            @foreach ($almoxarifados as $almoxarifado)
+                                <option value="{{ $almoxarifado->id }}" 
+                                    {{ old('almoxarifado_id', $produto->almox_id) == $almoxarifado->id ? 'selected' : '' }}>
+                                    {{ $almoxarifado->nome }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>    
+
+                    <div class="col-md-2">
+                        <label for="cod_prod" class="form-label">Código do Produto</label>
                         <input
                             type="text"
                             class="form-control"
-                            id="ALMOX_PROD"
-                            name="ALMOX_PROD"
-                            value="{{ old('ALMOX_PROD', $produto->ALMOX_PROD) }}"
-                            maxlength="50"
+                            id="cod_prod"
+                            name="cod_prod"
+                            value="{{ old('cod_prod', $produto->cod_prod) }}"
                         >
                     </div>
 
                     <div class="col-12">
-                        <label for="DESC_PROD" class="form-label">Descrição</label>
+                        <label for="desc_prod" class="form-label">Descrição</label>
                         <input
                             type="text"
                             class="form-control"
-                            id="DESC_PROD"
-                            name="DESC_PROD"
-                            value="{{ old('DESC_PROD', $produto->DESC_PROD) }}"
-                            maxlength="255"
+                            id="desc_prod"
+                            name="desc_prod"
+                            value="{{ old('desc_prod', $produto->desc_prod) }}"
                         >
                     </div>
 
                     <div class="col-md-4">
-                        <label for="QUANT_PROD" class="form-label">Quantidade</label>
+                        <label for="quant_prod" class="form-label">Quantidade</label>
                         <input
                             type="number"
                             class="form-control"
-                            id="QUANT_PROD"
-                            name="QUANT_PROD"
-                            value="{{ old('QUANT_PROD', $produto->QUANT_PROD) }}"
-                            min="0"
+                            id="quant_prod"
+                            name="quant_prod"
+                            value="{{ old('quant_prod', $produto->quant_prod) }}"
                         >
                     </div>
 
                     <div class="col-md-4">
-                        <label for="QUANT_MIN_PROD" class="form-label">Qtd. Mínima</label>
+                        <label for="quant_min_prod" class="form-label">Qtd. Mínima</label>
                         <input
                             type="number"
                             class="form-control"
-                            id="QUANT_MIN_PROD"
-                            name="QUANT_MIN_PROD"
-                            value="{{ old('QUANT_MIN_PROD', $produto->QUANT_MIN_PROD) }}"
-                            min="0"
+                            id="quant_min_prod"
+                            name="quant_min_prod"
+                            value="{{ old('quant_min_prod', $produto->quant_min_prod) }}"
                         >
                     </div>
 
                     <div class="col-md-2">
-                        <label for="CATEGORIA_ID" class="form-label">Categoria <span class="text-danger">*</span></label>
-                        <select id="CATEGORIA_ID" name="CATEGORIA_ID" class="form-select" required>
+                        <label for="categoria_id" class="form-label">Categoria</label>
+                        <select id="categoria_id" name="categoria_id" class="form-select" required>
                             <option value="">Selecione...</option>
                             @foreach ($categorias as $categoria)
-                                <option value="{{ $categoria->ID }}" 
-                                    {{ old('CATEGORIA_ID', $produto->CATEGORIA_ID) == $categoria->ID ? 'selected' : '' }}>
-                                    {{ $categoria->NOME }}
+                                <option value="{{ $categoria->id }}" 
+                                    {{ old('categoria_id', $produto->categoria_id) == $categoria->id ? 'selected' : '' }}>
+                                    {{ $categoria->nome }}
                                 </option>
                             @endforeach
                         </select>
                     </div>
 
                     <div class="col-md-2">
-                        <label for="GRUPO_ID" class="form-label">Grupo <span class="text-danger">*</span></label>
-                        <select id="GRUPO_ID" name="GRUPO_ID" class="form-select" required>
+                        <label for="grupo_id" class="form-label">Grupo</label>
+                        <select id="grupo_id" name="grupo_id" class="form-select" required>
                             <option value="">Selecione...</option>
                             @foreach ($grupos as $grupo)
-                                <option value="{{ $grupo->ID }}" 
-                                    {{ old('GRUPO_ID', $produto->GRUPO_ID) == $grupo->ID ? 'selected' : '' }}>
-                                    {{ $grupo->NOME }}
+                                <option value="{{ $grupo->id }}" 
+                                    {{ old('grupo_id', $produto->grupo_id) == $grupo->id ? 'selected' : '' }}>
+                                    {{ $grupo->nome }}
                                 </option>
                             @endforeach
                         </select>

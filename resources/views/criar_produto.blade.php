@@ -59,50 +59,74 @@
                 <form action="{{ route('create-produto') }}" method="POST" class="row g-3">
                     @csrf
 
-                    <div class="col-md-6">
-                        <label for="COD_PROD" class="form-label">Código do Produto <span style="color: red">*</span></label>
-                        <input type="text" class="form-control" id="COD_PROD" name="COD_PROD" value="{{ old('COD_PROD') }}">
+
+                    <div class="col-md-4">
+                        <label for="nome_prod" class="form-label">Nome do Produto <span style="color: red">*</span></label>
+                        <input type="text" class="form-control" id="nome_prod" name="nome_prod" value="{{ old('nome_prod') }}">
                     </div>
 
+
                     <div class="col-md-6">
-                        <label for="ALMOX_PROD" class="form-label">Almoxarifado <span style="color: red">*</span></label>
-                        <input type="text" class="form-control" id="ALMOX_PROD" name="ALMOX_PROD" value="{{ old('ALMOX_PROD') }}">
+                        <label for="almox_id" class="form-label">Almoxarifado <span style="color: red">*</span></label>
+                        <select id="almox_id" name="almox_id" class="form-select">
+                            <option value="">Selecione...</option>
+                            @foreach ($almoxarifados as $almoxarifado)
+                                <option value="{{ $almoxarifado->id }}" {{ old('almox_id') == $almoxarifado->id ? 'selected' : '' }}>
+                                    {{ $almoxarifado->nome }}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
+
+                    <div class="col-md-2">
+                        <label for="cod_prod" class="form-label">Codigo do Produto</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="cod_prod"
+                            name="cod_prod"
+                            value="{{ old('cod_prod') }}"
+                            maxlength="6"
+                            pattern="\d{6}"
+                            title="Informe exatamente 6 digitos numericos"
+                        >
+                    </div>
+
 
                     <div class="col-12">
-                        <label for="DESC_PROD" class="form-label">Descrição <span style="color: red">*</span></label>
-                        <input type="text" class="form-control" id="DESC_PROD" name="DESC_PROD" value="{{ old('DESC_PROD') }}">
+                        <label for="desc_prod" class="form-label">Descrição</label>
+                        <input type="text" class="form-control" id="desc_prod" name="desc_prod" value="{{ old('desc_prod') }}">
                     </div>
 
                     <div class="col-md-4">
-                        <label for="QUANT_PROD" class="form-label">Quantidade <span style="color: red">*</span></label>
-                        <input type="number" class="form-control" id="QUANT_PROD" name="QUANT_PROD" value="{{ old('QUANT_PROD', 0) }}">
+                        <label for="quant_prod" class="form-label">Quantidade <span style="color: red">*</span></label>
+                        <input type="number" class="form-control" id="quant_prod" name="quant_prod" value="{{ old('quant_prod', 0) }}">
                     </div>
 
                     <div class="col-md-4">
-                        <label for="QUANT_MIN_PROD" class="form-label">Qtd. Mínima</label>
-                        <input type="number" class="form-control" id="QUANT_MIN_PROD" name="QUANT_MIN_PROD" value="{{ old('QUANT_MIN_PROD', 0) }}">
+                        <label for="quant_min_prod" class="form-label">Qtd. Mínima</label>
+                        <input type="number" class="form-control" id="quant_min_prod" name="quant_min_prod" value="{{ old('quant_min_prod', 0) }}">
                     </div>
 
                 <div class="col-md-2">
-                    <label for="CATEGORIA_ID" class="form-label">Categoria <span style="color: red">*</span></label>
-                    <select id="CATEGORIA_ID" name="CATEGORIA_ID" class="form-select">
+                    <label for="categoria_id" class="form-label">Categoria <span style="color: red">*</span></label>
+                    <select id="categoria_id" name="categoria_id" class="form-select">
                         <option value="">Selecione...</option>
                         @foreach ($categorias as $categoria)
-                            <option>
-                                {{ $categoria->NOME }}
+                            <option value="{{ $categoria->id }}" {{ old('categoria_id') == $categoria->id ? 'selected' : '' }}>
+                                {{ $categoria->nome }}
                             </option>
                         @endforeach
                     </select>
                 </div>
 
                 <div class="col-md-2">
-                    <label for="GRUPO_ID" class="form-label">Grupo <span style="color: red">*</span></label>
-                    <select id="GRUPO_ID" name="GRUPO_ID" class="form-select">
+                    <label for="grupo_id" class="form-label">Grupo <span style="color: red">*</span></label>
+                    <select id="grupo_id" name="grupo_id" class="form-select">
                         <option value="">Selecione...</option>
                         @foreach ($grupos as $grupo)
-                            <option>
-                                {{ $grupo->NOME }}
+                            <option value="{{ $grupo->id }}" {{ old('grupo_id') == $grupo->id ? 'selected' : '' }}>
+                                {{ $grupo->nome }}
                             </option>
                         @endforeach
                     </select>

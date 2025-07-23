@@ -9,7 +9,6 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
-    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <style>
         html, body {
@@ -44,43 +43,47 @@
                 <h5 class="mb-3">Produtos Encontrados</h5>
 
                 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="produtos-container">
-                    @forelse ($data as $produto)
+                    @forelse ($produtos as $produto)
                         <div class="col">
                             <div class="card h-100 shadow-sm border-0">
                                 <div class="card-body">
                                     <h5 class="card-title text-primary">
-                                        <i class="bi bi-box-seam"></i> {{ $produto['COD_PROD'] }}
+                                        <i class="bi bi-box-seam"></i> {{ $produto['nome_prod'] }} - {{ $produto['cod_prod'] }}
                                     </h5>
                                     <h6 class="card-subtitle mb-2 text-muted">
-                                        {{ $produto['DESC_PROD'] }}
+                                        {{ $produto['desc_prod'] }}
                                     </h6>
 
                                     <ul class="list-group list-group-flush mt-3 mb-3">
                                         <li class="list-group-item">
                                             <i class="bi bi-building"></i>
-                                            <strong>Almoxarifado:</strong> {{ $produto['ALMOX_PROD'] ?? '-' }}
+                                            <strong>Almoxarifado:</strong> 
+                                            <br>{{ $almoxarifados[$produto['almox_id']-1]['nome'] ?? '-' }}
                                         </li>
                                         <li class="list-group-item">
                                             <i class="bi bi-archive"></i>
                                             <strong>Quantidade:</strong>
-                                            <span class="{{ $produto['QUANT_PROD'] < $produto['QUANT_MIN_PROD'] ? 'text-danger fw-bold' : '' }}">
-                                                {{ $produto['QUANT_PROD'] }}
+                                            <br><span class="{{ $produto['quant_prod'] < $produto['quant_min_prod'] ? 'text-danger fw-bold' : '' }}">
+                                                {{ $produto['quant_prod'] }}
                                             </span>
                                         </li>
                                         <li class="list-group-item">
                                             <i class="bi bi-exclamation-circle"></i>
-                                            <strong>Qtd. Mínima:</strong> {{ $produto['QUANT_MIN_PROD'] }}
+                                            <strong>Qtd. Mínima:</strong>
+                                            <br>{{ $produto['quant_min_prod'] }}
                                         </li>
                                         <li class="list-group-item">
                                             <i class="bi bi-tags"></i>
-                                            <strong>Categoria ID:</strong> {{ $produto['CATEGORIA_ID'] }}
+                                            <strong>Categoria:</strong> 
+                                            <br>{{ $categorias[$produto['categoria_id']-1]['nome'] ?? '-'  }}
                                         </li>
                                         <li class="list-group-item">
                                             <i class="bi bi-diagram-3"></i>
-                                            <strong>Grupo ID:</strong> {{ $produto['GRUPO_ID'] }}
+                                            <strong>Grupo:</strong> 
+                                            <br>{{ $grupos[$produto['grupo_id']-1]['nome'] ?? '-' }}
                                         </li>
                                     </ul>
-                                    <a href="{{ route('edit', $produto['ID']) }}" class="btn btn-sm btn-primary">
+                                    <a href="{{ route('edit', $produto['id']) }}" class="btn btn-sm btn-primary">
                                         <i class="bi bi-pencil-square"></i> Editar
                                     </a>
                                 </div>
