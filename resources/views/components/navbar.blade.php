@@ -115,31 +115,21 @@
         <!-- LISTAGEM DE PRODUTOS -->
         <li class="list-group-item rounded-1 p-0 overflow-hidden ">
             <a href="{{ route('index') }}" class="link-agendar d-flex align-items-center gap-2 p-2">
-                <i class="fas fa-home"></i> Listagem de Produtos
+                <i class="fas fa-home"></i> Produto
             </a>
         </li>
 
-
-        <!-- CRIAR UM PRODUTO -->
+        <!-- LISTAGEM DE PRODUTOS -->
         <li class="list-group-item rounded-1 p-0 overflow-hidden ">
-            <a href="{{ route('criar-produto') }}" class="link-agendar d-flex align-items-center gap-2 p-2">
-                <i class="fas fa-calendar-plus"></i> Cadastro de produto
+            <a href="{{ route('index') }}" class="link-agendar d-flex align-items-center gap-2 p-2">
+                <i class="fas fa-home"></i> Almoxarifado
             </a>
         </li>
-
-
-        {{-- <!-- EDITAR UM PRODUTO -->
-        <li class="list-group-item rounded-1 p-0 overflow-hidden ">
-            <a href="/psicologia/consultar-agendamento" class="link-agendar d-flex align-items-center gap-2 p-2">
-                <i class="fas fa-edit"></i> Editar Produto
-            </a>
-        </li> --}}
-
 
         <!-- CADASTRAR CATEGORIA -->
         <li class="list-group-item rounded-1 p-0 overflow-hidden ">
-            <a href="" class="link-agendar d-flex align-items-center gap-2 p-2">
-                <i class="fas fa-user-plus"></i> Cadastro de Categoria
+            <a href="{{ route('get-categoria') }}" class="link-agendar d-flex align-items-center gap-2 p-2">
+                <i class="fas fa-user-plus"></i> Categoria
             </a>
         </li>
 
@@ -147,7 +137,7 @@
         <!-- CADASTRO  -->
         <li class="list-group-item rounded-1 p-0 overflow-hidden ">
             <a href="" class="link-agendar d-flex align-items-center gap-2 p-2">
-                <i class="fas fa-users"></i> Cadastro de Grupo
+                <i class="fas fa-users"></i> Grupo
             </a>
         </li>
 
