@@ -38,9 +38,14 @@
         <div class="bg-white p-4 rounded shadow-sm w-100">
             <h2 class="mb-4 text-center">Consulta de Produtos</h2>
 
-            <!-- Bloco de Cards -->
-            <div class="w-100">
-                <h5 class="mb-3">Produtos Encontrados</h5>
+                <!-- Bloco de Título e Botão -->
+                <div class="w-100 d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="mb-0">Produtos Encontrados</h5>
+                    <a href="{{ route('criar-produto') }}" class="btn btn-sm btn-success">
+                        <i class="bi bi-plus-circle"></i> Novo Produto
+                    </a>
+                </div>
+
 
                 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="produtos-container">
                     @forelse ($produtos as $produto)
