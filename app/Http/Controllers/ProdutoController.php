@@ -2,72 +2,78 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\EstoqueMedCategoria;
-use App\Models\EstoqueMedGrupo;
+use App\Models\EstoqueAlmoxarifado;
+use App\Models\EstoqueCategoria;
+use App\Models\EstoqueGrupo;
 use Illuminate\Http\Request;
-use App\Models\EstoqueMedProduto;
+use App\Models\EstoqueProduto;
+use Illuminate\Support\Facades\DB;
+
 
 class ProdutoController extends Controller
 {
     public function index()
     {
-        $data = EstoqueMedProduto::all();
-        return view('get_produto', compact('data'));
+        $produtos = EstoqueProduto::all();
+        $almoxarifados = EstoqueAlmoxarifado::all()->toArray();
+        $grupos = EstoqueGrupo::all()->toArray();
+        $categorias = EstoqueCategoria::all()->toArray();
+        return view('get_produto', compact('produtos', 'almoxarifados', 'grupos', 'categorias'));
     }
 
     // GET
     public function getProduto()
     {
-        return EstoqueMedProduto::all();
+        return EstoqueProduto::all();
     }
 
     public function createProduto(Request $request)
     {
-
-        // Validação simples dos dados recebidos
         $validated = $request->validate([
-            'COD_PROD'       => 'required|string|max:50',
-            'ALMOX_PROD'     => 'required|string|max:50',
-            'DESC_PROD'      => 'required|string|max:255',
-            'QUANT_PROD'     => 'required|integer|min:0',
-            'QUANT_MIN_PROD' => 'nullable|integer|min:0',
-            'CATEGORIA_ID'   => 'required|integer|exists:ESTOQUE_MED_CATEGORIA,ID',
-            'GRUPO_ID'       => 'required|integer|exists:ESTOQUE_MED_GRUPO,ID',
-        ],
-        [
-            'COD_PROD.required' => 'Digite o código do produto antes de continuar',
-            'ALMOX_PROD.required' => 'Informe em qual almoxarifado o produto vai estar antes de continuar',
-            'DESC_PROD.required' => 'Informe a descrição do Produto antes de continuar',
-            'QUANT_PROD.required' => 'Digite a quantidade do Produto antes de continuar',
-            'CATEGORIA_ID.required' => 'Defina um categoria antes de continuar',
-            'GRUPO_ID.required' => 'Defina um grupo antes de continuar',
+            'nome_prod'      => 'required|string|max:50',
+            'cod_prod'       => 'nullable|string|size:6|regex:/^\d{6}$/|unique:estoque_produto,cod_prod',
+            'quant_prod'     => 'required|integer|min:0',
+            'quant_min_prod' => 'nullable|integer|min:0',
+            'almox_id'       => 'required|integer|exists:estoque_almoxarifado,id',
+            'categoria_id'   => 'required|integer|exists:estoque_categoria,id',
+            'grupo_id'       => 'required|integer|exists:estoque_grupo,id',
+        ], [
+            'nome_prod.required'    => 'Digite o nome do produto antes de continuar',
+            'desc_prod.required'    => 'Informe a descrição do Produto antes de continuar',
+            'quant_prod.required'   => 'Digite a quantidade do Produto antes de continuar',
+            'almox_id.required'     => 'Informe em qual almoxarifado o produto vai estar antes de continuar',
+            'categoria_id.required' => 'Defina um categoria antes de continuar',
+            'grupo_id.required'     => 'Defina um grupo antes de continuar',
         ]);
 
-        // Cria o produto com os dados validados
-        $produto = EstoqueMedProduto::create($validated);
+        $produto = new EstoqueProduto($validated);
 
-        // Retorna resposta JSON com sucesso e dados do produto criado
-        return response()->json([
-            'message' => 'Produto criado com sucesso',
-            'produto' => $produto
-        ], 201);
+        // Se cod_prod não foi informado, gerar código com base no próximo ID
+        if (empty($validated['cod_prod'])) {
+            // Recupera o próximo ID futuro com base no AUTO_INCREMENT
+            $nextId = DB::table('estoque_produto')->max('id') + 1;
+            $produto->cod_prod = str_pad($nextId, 6, '0', STR_PAD_LEFT);
+        }
+
+        $produto->save();
+
+        return redirect()->route('index')->with('success', 'Produto criado com sucesso.');
     }
 
     public function updateProduto(Request $request, $id)
     {
         // Validação dos dados
         $validated = $request->validate([
-            'COD_PROD'       => 'required|string|max:50',
-            'ALMOX_PROD'     => 'nullable|string|max:50',
-            'DESC_PROD'      => 'nullable|string|max:255',
-            'QUANT_PROD'     => 'nullable|integer|min:0',
-            'QUANT_MIN_PROD' => 'nullable|integer|min:0',
-            'CATEGORIA_ID'   => 'nullable|integer|exists:ESTOQUE_MED_CATEGORIA,ID',
-            'GRUPO_ID'       => 'nullable|integer|exists:ESTOQUE_MED_GRUPO,ID',
+            'desc_prod'      => 'nullable|string|max:255',
+            'quant_prod'     => 'nullable|integer|min:0',
+            'quant_min_prod' => 'nullable|integer|min:0',
+            'almox_id'       => 'nullable|integer|exists:estoque_almoxarifado,id',
+            'categoria_id'   => 'nullable|integer|exists:estoque_categoria,id',
+            'grupo_id'       => 'nullable|integer|exists:estoque_grupo,id',
         ]);
 
         // Busca o produto pelo ID
-        $produto = EstoqueMedProduto::findOrFail($id);
+        $produto = EstoqueProduto::findOrFail($id);
 
         // Atualiza com os dados validados
         $produto->update($validated);
@@ -77,10 +83,11 @@ class ProdutoController extends Controller
 
     public function edit($id)
     {
-        $produto = EstoqueMedProduto::findOrFail($id);
-        $categorias = EstoqueMedCategoria::all();
-        $grupos = EstoqueMedGrupo::all();
-        return view('edita_produto', compact('produto', 'categorias', 'grupos'));
+        $produto = EstoqueProduto::findOrFail($id);
+        $almoxarifados = EstoqueAlmoxarifado::all();
+        $categorias = EstoqueCategoria::all();
+        $grupos = EstoqueGrupo::all();
+        return view('edita_produto', compact('produto', 'categorias', 'grupos', 'almoxarifados'));
     }
 
 

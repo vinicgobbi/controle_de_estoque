@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\EstoqueMedCategoria;
+use App\Models\EstoqueCategoria;
 class CategoriaController extends Controller
 {
     public function getCategoria()
     {
-        return EstoqueMedCategoria::all();
+        return EstoqueCategoria::all();
     }
 }
