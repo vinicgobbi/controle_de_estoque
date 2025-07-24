@@ -35,31 +35,31 @@
 
     <div id="content-wrapper">
         <div class="bg-white p-4 rounded shadow-sm w-100">
-            <h2 class="mb-4 text-center">Consulta de Categorias</h2>
+            <h2 class="mb-4 text-center">Consulta de Grupos</h2>
                 
 			<!-- Bloco de Título e Botão -->
             <div class="w-100 d-flex justify-content-between align-items-center mb-3">
-                <h5 class="mb-0">Categorias Encontradas</h5>
-                <a href="{{ route('index') }}" class="btn btn-sm btn-success">
-                    <i class="bi bi-plus-circle"></i> Nova Categoria
+                <h5 class="mb-0">Grupos Encontrados</h5>
+                <a href="{{ route('criar-grupo') }}" class="btn btn-sm btn-success">
+                    <i class="bi bi-plus-circle"></i> Novo Grupo
 				</a>
             </div>
 
 
                 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="categorias-container">
-                    @forelse ($categorias as $categoria)
+                    @forelse ($grupos as $grupo)
                         <div class="col">
                             <div class="card h-100 shadow-sm border-0">
                                 <div class="card-body">
                                     <h5 class="card-title text-primary-emphasis">
-                                        <i class="bi bi-tags"></i> {{ $categoria->nome }}
+                                        <i class="bi bi-diagram-3"></i> {{ $grupo->nome }}
                                     </h5>
                                 </div>
                             </div>
                         </div>
                     @empty
                         <div class="col-12">
-                            <div class="alert alert-warning text-center">Nenhuma categoria encontrada.</div>
+                            <div class="alert alert-warning text-center">Nenhum grupo encontrado.</div>
                         </div>
                     @endforelse
                 </div>

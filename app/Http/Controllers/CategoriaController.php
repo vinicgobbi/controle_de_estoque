@@ -11,4 +11,14 @@ class CategoriaController extends Controller
         $categorias = EstoqueCategoria::all();
         return view('get_categoria', compact('categorias'));
     }
+
+    public function createCategoria()
+    {
+        
+    }
+
+    public function updateCategoria()
+    {
+
+    }
 }

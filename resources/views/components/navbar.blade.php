@@ -115,28 +115,28 @@
         <!-- LISTAGEM DE PRODUTOS -->
         <li class="list-group-item rounded-1 p-0 overflow-hidden ">
             <a href="{{ route('index') }}" class="link-agendar d-flex align-items-center gap-2 p-2">
-                <i class="fas fa-home"></i> Produto
+                <i class="bi bi-box-seam"></i> Produto
             </a>
         </li>
 
         <!-- LISTAGEM DE PRODUTOS -->
         <li class="list-group-item rounded-1 p-0 overflow-hidden ">
-            <a href="{{ route('index') }}" class="link-agendar d-flex align-items-center gap-2 p-2">
-                <i class="fas fa-home"></i> Almoxarifado
+            <a href="{{ route('almoxarifados') }}" class="link-agendar d-flex align-items-center gap-2 p-2">
+                <i class="bi bi-building"></i> Almoxarifado
             </a>
         </li>
 
         <!-- CADASTRAR CATEGORIA -->
         <li class="list-group-item rounded-1 p-0 overflow-hidden ">
-            <a href="{{ route('get-categoria') }}" class="link-agendar d-flex align-items-center gap-2 p-2">
-                <i class="fas fa-user-plus"></i> Categoria
+            <a href="{{ route('categorias') }}" class="link-agendar d-flex align-items-center gap-2 p-2">
+                <i class="bi bi-tags"></i> Categoria
             </a>
         </li>
 
         
         <!-- CADASTRO  -->
         <li class="list-group-item rounded-1 p-0 overflow-hidden ">
-            <a href="" class="link-agendar d-flex align-items-center gap-2 p-2">
+            <a href="{{ route('grupos') }}" class="link-agendar d-flex align-items-center gap-2 p-2">
                 <i class="fas fa-users"></i> Grupo
             </a>
         </li>

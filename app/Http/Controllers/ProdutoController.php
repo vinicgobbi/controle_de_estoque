@@ -64,12 +64,20 @@ class ProdutoController extends Controller
     {
         // Validação dos dados
         $validated = $request->validate([
-            'desc_prod'      => 'nullable|string|max:255',
-            'quant_prod'     => 'nullable|integer|min:0',
+            'nome_prod'      => 'required|string|max:50',
+            'cod_prod'       => 'nullable|string|size:6|regex:/^\d{6}$/|unique:estoque_produto,cod_prod',
+            'quant_prod'     => 'required|integer|min:0',
             'quant_min_prod' => 'nullable|integer|min:0',
-            'almox_id'       => 'nullable|integer|exists:estoque_almoxarifado,id',
-            'categoria_id'   => 'nullable|integer|exists:estoque_categoria,id',
-            'grupo_id'       => 'nullable|integer|exists:estoque_grupo,id',
+            'almox_id'       => 'required|integer|exists:estoque_almoxarifado,id',
+            'categoria_id'   => 'required|integer|exists:estoque_categoria,id',
+            'grupo_id'       => 'required|integer|exists:estoque_grupo,id',
+        ], [
+            'nome_prod.required'    => 'Digite o nome do produto antes de continuar',
+            'desc_prod.required'    => 'Informe a descrição do Produto antes de continuar',
+            'quant_prod.required'   => 'Digite a quantidade do Produto antes de continuar',
+            'almox_id.required'     => 'Informe em qual almoxarifado o produto vai estar antes de continuar',
+            'categoria_id.required' => 'Defina um categoria antes de continuar',
+            'grupo_id.required'     => 'Defina um grupo antes de continuar',
         ]);
 
         // Busca o produto pelo ID

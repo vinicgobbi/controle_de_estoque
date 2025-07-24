@@ -48,7 +48,7 @@
 
                     <div class="col-md-6">
                         <label for="almox_id" class="form-label">Almoxarifado</label>
-                        <select id="almox_id" name="almox_id" class="form-select" required>
+                        <select id="almox_id" name="almox_id" class="form-select">
                             <option value="">Selecione...</option>
                             @foreach ($almoxarifados as $almoxarifado)
                                 <option value="{{ $almoxarifado->id }}" 
@@ -67,6 +67,7 @@
                             id="cod_prod"
                             name="cod_prod"
                             value="{{ old('cod_prod', $produto->cod_prod) }}"
+                            disabled {{-- Torna o campo inativo para edições e não envia para o formulario --}}
                         >
                     </div>
 
@@ -105,7 +106,7 @@
 
                     <div class="col-md-2">
                         <label for="categoria_id" class="form-label">Categoria</label>
-                        <select id="categoria_id" name="categoria_id" class="form-select" required>
+                        <select id="categoria_id" name="categoria_id" class="form-select">
                             <option value="">Selecione...</option>
                             @foreach ($categorias as $categoria)
                                 <option value="{{ $categoria->id }}" 
@@ -118,7 +119,7 @@
 
                     <div class="col-md-2">
                         <label for="grupo_id" class="form-label">Grupo</label>
-                        <select id="grupo_id" name="grupo_id" class="form-select" required>
+                        <select id="grupo_id" name="grupo_id" class="form-select">
                             <option value="">Selecione...</option>
                             @foreach ($grupos as $grupo)
                                 <option value="{{ $grupo->id }}" 
