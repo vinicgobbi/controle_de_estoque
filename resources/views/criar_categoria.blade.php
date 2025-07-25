@@ -56,7 +56,7 @@
                     </div>
                 @endif
 
-                <form action="{{ route('create-grupo') }}" method="POST" class="row g-3">
+                <form action="{{ route('create-categoria') }}" method="POST" class="row g-3">
                     @csrf
 
 

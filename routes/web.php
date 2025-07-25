@@ -40,3 +40,7 @@ Route::get('/categorias/criar', function (){
 })->name('criar-categoria');
 
 Route::get('/almoxarifados', [AlmoxarifadoController::class, 'getAlmoxarifado'])->name('almoxarifados');
+Route::post('/almoxarifados/criar', [AlmoxarifadoController::class, 'createAlmoxarifado'])->name('create-almoxarifado');
+Route::get('/almoxarifados/criar', function (){
+	return view('criar_almoxarifado');
+})->name('criar-almoxarifado');

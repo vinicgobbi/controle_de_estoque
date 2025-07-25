@@ -53,7 +53,7 @@
                             <div class="card h-100 shadow-sm border-0">
                                 <div class="card-body">
                                     <h5 class="card-title text-primary">
-                                        <i class="bi bi-box-seam"></i> {{ $produto['nome_prod'] }} - {{ $produto['cod_prod'] }}
+                                        <i class="bi bi-box-seam"></i> {{ $produto['cod_prod'] }} | {{ $produto['nome_prod'] }}
                                     </h5>
                                     <h6 class="card-subtitle mb-2 text-muted">
                                         {{ $produto['desc_prod'] }}

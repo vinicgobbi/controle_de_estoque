@@ -22,7 +22,7 @@ class CategoriaController extends Controller
 
         EstoqueCategoria::create($validated);
 
-        return route('categoria');
+        return redirect()->route('categorias');
     }
 
     public function updateCategoria()

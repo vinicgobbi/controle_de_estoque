@@ -13,9 +13,17 @@ class AlmoxarifadoController extends Controller
         return view('get_almoxarifado', compact('almoxarifados'));
     }
 
-    public function createAlmoxarifado()
+    public function createAlmoxarifado(Request $request)
     {
+        $validated = $request->validate([
+            'nome'          => 'required'
+        ],[
+            'nome.required' =>  'Insira um nome para o almoxarifado antes de continuar',
+        ]);
 
+        EstoqueAlmoxarifado::create($validated);
+
+        return redirect()->route('almoxarifados');  
     }
 
     public function updateAlmoxarifado()

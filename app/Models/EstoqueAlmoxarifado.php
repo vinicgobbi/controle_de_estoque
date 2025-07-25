@@ -8,4 +8,8 @@ class EstoqueAlmoxarifado extends Model
 {
     protected $table = 'estoque_almoxarifado';
 
+    protected $fillable = [
+        'nome'
+    ];
+
 }
