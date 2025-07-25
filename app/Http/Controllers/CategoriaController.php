@@ -12,6 +12,13 @@ class CategoriaController extends Controller
         return view('get_categoria', compact('categorias'));
     }
 
+    public function getCategoriaPorAlmox($almox_id)
+    {
+        $categorias = EstoqueCategoria::where('almox_id', $almox_id)->get();
+
+        return response()->json($categorias);
+    }
+
     public function createCategoria(Request $request)
     {
         $validated = $request->validate([

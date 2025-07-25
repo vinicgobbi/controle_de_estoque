@@ -13,6 +13,13 @@ class GrupoController extends Controller
         return view('get_grupo', compact('grupos'));
     }
 
+    public function getGrupoPorCategoria($categoria_id)
+    {
+        $grupos = EstoqueGrupo::where('categoria_id', $categoria_id)->get();
+
+        return response()->json($grupos);
+    }
+
     public function createGrupo(Request $request)
     {
         $validated = $request->validate([

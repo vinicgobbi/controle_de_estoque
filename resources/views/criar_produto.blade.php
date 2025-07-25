@@ -110,13 +110,8 @@
 
                 <div class="col-md-2">
                     <label for="categoria_id" class="form-label">Categoria <span style="color: red">*</span></label>
-                    <select id="categoria_id" name="categoria_id" class="form-select">
+                    <select id="categoria_id" name="categoria_id" class="form-select" disabled>
                         <option value="">Selecione...</option>
-                        @foreach ($categorias as $categoria)
-                            <option value="{{ $categoria->id }}" {{ old('categoria_id') == $categoria->id ? 'selected' : '' }}>
-                                {{ $categoria->nome }}
-                            </option>
-                        @endforeach
                     </select>
                 </div>
 
@@ -144,5 +139,39 @@
 
     <!-- Scripts Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+document.getElementById('almox_id').addEventListener('change', function () {
+    const almoxId = this.value;
+    const categoriaSelect = document.getElementById('categoria_id');
+
+    categoriaSelect.innerHTML = '<option value="">Carregando...</option>';
+    categoriaSelect.disabled = true; // Desativa enquanto carrega ou se nada estiver selecionado
+
+    if (almoxId) {
+        fetch(`/categorias/almox/${almoxId}`)
+            .then(response => response.json())
+            .then(data => {
+                categoriaSelect.innerHTML = '<option value="">Selecione...</option>';
+
+                data.forEach(function (categoria) {
+                    const option = document.createElement('option');
+                    option.value = categoria.id;
+                    option.textContent = categoria.nome;
+                    categoriaSelect.appendChild(option);
+                });
+
+                categoriaSelect.disabled = false; // Habilita após carregar
+            })
+            .catch(() => {
+                categoriaSelect.innerHTML = '<option value="">Erro ao carregar</option>';
+                categoriaSelect.disabled = true;
+            });
+    } else {
+        categoriaSelect.innerHTML = '<option value="">Selecione...</option>';
+        categoriaSelect.disabled = true;
+    }
+});
+</script>
 </body>
 </html>

@@ -40,6 +40,7 @@ Route::get('/categorias/criar', function (){
 	$almoxarifados = EstoqueAlmoxarifado::all();
 	return view('criar_categoria', compact('almoxarifados'));
 })->name('criar-categoria');
+Route::get('/categorias/almox/{almox_id}',[CategoriaController::class, 'getCategoriaPorAlmox']);
 
 //Rotas referentes a grupos
 Route::get('/grupos', [GrupoController::class, 'getGrupo'])->name('grupos');
@@ -48,3 +49,4 @@ Route::get('/grupos/criar', function (){
 	$categorias = EstoqueCategoria::all();
 	return view('criar_grupo', compact('categorias'));
 })->name('criar-grupo');
+Route::get('/grupos/categoria/{categoria_id}', [GrupoController::class, 'getGrupoPorCategoria']);
