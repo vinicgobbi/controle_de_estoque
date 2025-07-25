@@ -12,9 +12,17 @@ class CategoriaController extends Controller
         return view('get_categoria', compact('categorias'));
     }
 
-    public function createCategoria()
+    public function createCategoria(Request $request)
     {
-        
+        $validated = $request->validate([
+            'nome'          => 'required'
+        ],[
+            'nome.required' =>  'Insira um nome para categoria antes de continuar',
+        ]);
+
+        EstoqueCategoria::create($validated);
+
+        return route('categoria');
     }
 
     public function updateCategoria()

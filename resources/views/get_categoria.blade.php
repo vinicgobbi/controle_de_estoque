@@ -40,7 +40,7 @@
 			<!-- Bloco de Título e Botão -->
             <div class="w-100 d-flex justify-content-between align-items-center mb-3">
                 <h5 class="mb-0">Categorias Encontradas</h5>
-                <a href="{{ route('index') }}" class="btn btn-sm btn-success">
+                <a href="{{ route('criar-categoria') }}" class="btn btn-sm btn-success">
                     <i class="bi bi-plus-circle"></i> Nova Categoria
 				</a>
             </div>

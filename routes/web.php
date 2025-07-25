@@ -34,5 +34,9 @@ Route::get('/produtos/{id}/editar', [ProdutoController::class, 'edit'])->name('e
 
 
 Route::get('/categorias', [CategoriaController::class, 'getCategoria'])->name('categorias');
+Route::post('/categorias/criar', [CategoriaController::class, 'createCategoria'])->name('create-categoria');
+Route::get('/categorias/criar', function (){
+	return view('criar_categoria');
+})->name('criar-categoria');
 
 Route::get('/almoxarifados', [AlmoxarifadoController::class, 'getAlmoxarifado'])->name('almoxarifados');

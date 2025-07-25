@@ -36,5 +36,47 @@
     </style>
 </head>
 <body>
-	
+    @include('components.navbar')
+
+    <div class="container mt-5">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <h3 class="card-title mb-4">
+                    <i class="bi bi-plus-circle me-2"></i>Criar Nova Categoria
+                </h3>
+
+                @if ($errors->any())
+                    <div id="alert-error" class="alert alert-danger shadow position-fixed top-0 start-50 translate-middle-x mt-3" style="z-index: 1050; max-width: 90%;">
+                        <strong>Ops!</strong> Corrija os itens abaixo:
+                        <ul class="mb-0 mt-1 list-unstyled">
+                            @foreach ($errors->all() as $error)
+                                <li><i class="fas fa-exclamation-circle me-1"></i> {{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                <form action="{{ route('create-grupo') }}" method="POST" class="row g-3">
+                    @csrf
+
+
+                    <div class="col-md-4">
+                        <label for="nome" class="form-label">Nome da Categoria <span style="color: red">*</span></label>
+                        <input type="text" class="form-control" id="nome" name="nome" value="{{ old('nome') }}">
+                    </div>
+
+					<div class="col-12 mt-3">
+                        <button type="submit" class="btn btn-success">
+                            <i class="bi bi-check-circle me-1"></i>Salvar Categoria
+                        </button>
+                    </div>
+					
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+</html>
