@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('estoque_categoria', function (Blueprint $table) {
+        Schema::create('estoque_grupo', function (Blueprint $table) {
             $table->id();
             $table->string('nome', 100);
+            $table->foreignId('categoria_id')->constrained('estoque_categoria');
             $table->timestamps();
         });
     }
@@ -23,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('estoque_categoria');
+        Schema::dropIfExists('estoque_grupo');
     }
 };
