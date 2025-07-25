@@ -65,6 +65,18 @@
                         <input type="text" class="form-control" id="nome" name="nome" value="{{ old('nome') }}">
                     </div>
 
+                    <div class="col-md-4">
+                        <label for="categoria_id" class="form-label">Categoria <span style="color: red">*</span></label>
+                        <select id="categoria_id" name="categoria_id" class="form-select">
+                            <option value="">Selecione...</option>
+                            @foreach ($categorias as $categoria)
+                                <option value="{{ $categoria->id }}" {{ old('categoria_id') == $categoria->id ? 'selected' : '' }}>
+                                    {{ $categoria->nome }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
 					<div class="col-12 mt-3">
                         <button type="submit" class="btn btn-success">
                             <i class="bi bi-check-circle me-1"></i>Salvar Grupo

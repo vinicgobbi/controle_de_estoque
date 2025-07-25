@@ -9,6 +9,7 @@ class EstoqueGrupo extends Model
     protected $table = 'estoque_grupo';
 
     protected $fillable = [
-        'nome'
+        'nome',
+        'categoria_id'
     ];
 }

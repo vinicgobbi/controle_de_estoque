@@ -15,9 +15,11 @@ class CategoriaController extends Controller
     public function createCategoria(Request $request)
     {
         $validated = $request->validate([
-            'nome'          => 'required'
+            'nome'          => 'required',
+            'almox_id'      => 'required'
         ],[
-            'nome.required' =>  'Insira um nome para categoria antes de continuar',
+            'nome.required'         =>  'Insira um nome para categoria antes de continuar',
+            'almox_id.required'     =>  'Selecione um almoxarifado antes de continuar'
         ]);
 
         EstoqueCategoria::create($validated);

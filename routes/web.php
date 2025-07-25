@@ -14,12 +14,6 @@ Route::get('/', [ProdutoController::class, 'index'])->name('index');
 Route::get('/show', [ProdutoController::class, 'getProduto'])->name('show');
 
 
-//Rotas referente a grupo
-Route::get('/grupos', [GrupoController::class, 'getGrupo'])->name('grupos');
-Route::post('/grupos/criar', [GrupoController::class, 'createGrupo'])->name('create-grupo');
-Route::get('/grupos/criar', function (){
-	return view('criar_grupo');
-})->name('criar-grupo');
 
 //Rotas referente a produto
 Route::get('/produtos/criar', function () { //retorna a view de criar produto
@@ -32,15 +26,25 @@ Route::post('/produtos/criar', [ProdutoController::class, 'createProduto'])->nam
 Route::put('/produtos/{id}', [ProdutoController::class, 'updateProduto'])->name('update-produto'); // URL para editar o produto no banco
 Route::get('/produtos/{id}/editar', [ProdutoController::class, 'edit'])->name('edit'); // URL que retorna a View para realizar edição
 
-
-Route::get('/categorias', [CategoriaController::class, 'getCategoria'])->name('categorias');
-Route::post('/categorias/criar', [CategoriaController::class, 'createCategoria'])->name('create-categoria');
-Route::get('/categorias/criar', function (){
-	return view('criar_categoria');
-})->name('criar-categoria');
-
+//Rotas referentes a Almoxarifados
 Route::get('/almoxarifados', [AlmoxarifadoController::class, 'getAlmoxarifado'])->name('almoxarifados');
 Route::post('/almoxarifados/criar', [AlmoxarifadoController::class, 'createAlmoxarifado'])->name('create-almoxarifado');
 Route::get('/almoxarifados/criar', function (){
 	return view('criar_almoxarifado');
 })->name('criar-almoxarifado');
+
+//Rotas referentes a Categorias
+Route::get('/categorias', [CategoriaController::class, 'getCategoria'])->name('categorias');
+Route::post('/categorias/criar', [CategoriaController::class, 'createCategoria'])->name('create-categoria');
+Route::get('/categorias/criar', function (){
+	$almoxarifados = EstoqueAlmoxarifado::all();
+	return view('criar_categoria', compact('almoxarifados'));
+})->name('criar-categoria');
+
+//Rotas referentes a grupos
+Route::get('/grupos', [GrupoController::class, 'getGrupo'])->name('grupos');
+Route::post('/grupos/criar', [GrupoController::class, 'createGrupo'])->name('create-grupo');
+Route::get('/grupos/criar', function (){
+	$categorias = EstoqueCategoria::all();
+	return view('criar_grupo', compact('categorias'));
+})->name('criar-grupo');

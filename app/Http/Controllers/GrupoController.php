@@ -16,9 +16,11 @@ class GrupoController extends Controller
     public function createGrupo(Request $request)
     {
         $validated = $request->validate([
-            'nome'              => 'required|min:3|max:100'
+            'nome'              => 'required|min:3|max:100',
+            'categoria_id'      => 'required'
         ],[
-            'nome.required'     => 'Digite um nome para o grupo antes de continuar'
+            'nome.required'         => 'Digite um nome para o grupo antes de continuar',
+            'categoria_id.required' => 'Selecione uma categoria antes de continuars'
         ]);
 
         EstoqueGrupo::create($validated);
