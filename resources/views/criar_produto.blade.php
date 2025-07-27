@@ -99,32 +99,22 @@
                     </div>
 
                     <div class="col-md-4">
-                        <label for="quant_prod" class="form-label">Quantidade <span style="color: red">*</span></label>
-                        <input type="number" class="form-control" id="quant_prod" name="quant_prod" value="{{ old('quant_prod', 0) }}">
-                    </div>
-
-                    <div class="col-md-4">
                         <label for="quant_min_prod" class="form-label">Qtd. Mínima</label>
                         <input type="number" class="form-control" id="quant_min_prod" name="quant_min_prod" value="{{ old('quant_min_prod', 0) }}">
                     </div>
 
-                <div class="col-md-2">
+                <div class="col-md-4">
                     <label for="categoria_id" class="form-label">Categoria <span style="color: red">*</span></label>
                     <select id="categoria_id" name="categoria_id" class="form-select" disabled>
                         <option value="">Selecione...</option>
                     </select>
                 </div>
 
-                <div class="col-md-2">
+                <div class="col-md-4">
                     <label for="grupo_id" class="form-label">Grupo <span style="color: red">*</span></label>
-                    <select id="grupo_id" name="grupo_id" class="form-select">
-                        <option value="">Selecione...</option>
-                        @foreach ($grupos as $grupo)
-                            <option value="{{ $grupo->id }}" {{ old('grupo_id') == $grupo->id ? 'selected' : '' }}>
-                                {{ $grupo->nome }}
-                            </option>
-                        @endforeach
-                    </select>
+                        <select id="grupo_id" name="grupo_id" class="form-select" disabled>
+                            <option value="">Selecione...</option>
+                        </select>
                 </div>
 
                     <div class="col-12 mt-3">
@@ -170,6 +160,39 @@ document.getElementById('almox_id').addEventListener('change', function () {
     } else {
         categoriaSelect.innerHTML = '<option value="">Selecione...</option>';
         categoriaSelect.disabled = true;
+    }
+});
+</script>
+<script>
+document.getElementById('categoria_id').addEventListener('change', function () {
+    const categoriaId = this.value;
+    const grupoSelect = document.getElementById('grupo_id');
+
+    grupoSelect.innerHTML = '<option value="">Carregando...</option>';
+    grupoSelect.disabled = true;
+
+    if (categoriaId) {
+        fetch(`/grupos/categoria/${categoriaId}`)
+            .then(response => response.json())
+            .then(data => {
+                grupoSelect.innerHTML = '<option value="">Selecione...</option>';
+
+                data.forEach(function (grupo) {
+                    const option = document.createElement('option');
+                    option.value = grupo.id;
+                    option.textContent = grupo.nome;
+                    grupoSelect.appendChild(option);
+                });
+
+                grupoSelect.disabled = false;
+            })
+            .catch(() => {
+                grupoSelect.innerHTML = '<option value="">Erro ao carregar</option>';
+                grupoSelect.disabled = true;
+            });
+    } else {
+        grupoSelect.innerHTML = '<option value="">Selecione uma categoria</option>';
+        grupoSelect.disabled = true;
     }
 });
 </script>
