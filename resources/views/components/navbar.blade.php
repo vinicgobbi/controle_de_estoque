@@ -173,53 +173,53 @@
     <div class="offcanvas-body p-0" style="background-color: var(--light-color);">
         <ul class="list-group list-group-flush w-100">
             <!-- MESMOS LINKS DO SIDEBAR -->
-            <li class="list-group-item p-0 overflow-hidden ">
-                <a href="/psicologia/" class="link-agendar d-flex align-items-center gap-2 p-2">
-                    <i class="fas fa-home"></i> Início
-                </a>
-            </li>
-            <!-- INCLUIR AGENDAMENTO -->
-            <li class="list-group-item p-0 overflow-hidden ">
-                <a href="/psicologia/criar-agendamento" class="link-agendar d-flex align-items-center gap-2 p-2">
-                    <i class="fas fa-calendar-plus"></i> Incluir Agendamento
-                </a>
-            </li>
-            <!-- CONSULTAR AGENDAMENTO -->
-            <li class="list-group-item p-0 overflow-hidden ">
-                <a href="/psicologia/consultar-agendamento" class="link-agendar d-flex align-items-center gap-2 p-2">
-                    <i class="fas fa-edit"></i> Consultar Agenda
-                </a>
-            </li>
-            <!-- CADASTRAR PACIENTE -->
-            <li class="list-group-item p-0 overflow-hidden ">
-                <a href="/psicologia/criar-paciente" class="link-agendar d-flex align-items-center gap-2 p-2">
-                    <i class="fas fa-user-plus"></i> Cadastrar Paciente
-                </a>
-            </li>
-            <!-- CONSULTAR PACIENTE -->
-            <li class="list-group-item p-0 overflow-hidden ">
-                <a href="/psicologia/consultar-paciente" class="link-agendar d-flex align-items-center gap-2 p-2">
-                    <i class="fas fa-users"></i> Consultar Paciente
-                </a>
-            </li>
-            <!-- CADASTRAR SERVIÇO -->
-            <li class="list-group-item p-0 overflow-hidden ">
-                <a href="/psicologia/criar-servico" class="link-agendar d-flex align-items-center gap-2 p-2">
-                    <i class="bi bi-hammer"></i> Cadastrar Serviço
-                </a>
-            </li>
-            <!-- RELATÓRIO -->
-            <li class="list-group-item p-0 overflow-hidden ">
-                <a href="/psicologia/relatorios-agendamento" class="link-agendar d-flex align-items-center gap-2 p-2">
-                    <i class="fas fa-chart-bar"></i> Relatório
-                </a>
-            </li>
-            <!-- LOGOUT -->
-            <li class="list-group-item p-0 overflow-hidden ">
-                <a href="/psicologia/logout" class="link-logout d-flex align-items-center gap-2 p-2">
-                    <i class="fas fa-sign-out-alt"></i> Logout
-                </a>
-            </li>
+        <!-- LISTAGEM DE PRODUTOS -->
+        <li class="list-group-item rounded-1 p-0 overflow-hidden ">
+            <a href="{{ route('index') }}" class="link-agendar d-flex align-items-center gap-2 p-2">
+                <i class="bi bi-box-seam"></i> Produto
+            </a>
+        </li>
+
+        <!-- LISTAGEM DE PRODUTOS -->
+        <li class="list-group-item rounded-1 p-0 overflow-hidden ">
+            <a href="{{ route('almoxarifados') }}" class="link-agendar d-flex align-items-center gap-2 p-2">
+                <i class="bi bi-building"></i> Almoxarifado
+            </a>
+        </li>
+
+        <!-- CADASTRAR CATEGORIA -->
+        <li class="list-group-item rounded-1 p-0 overflow-hidden ">
+            <a href="{{ route('categorias') }}" class="link-agendar d-flex align-items-center gap-2 p-2">
+                <i class="bi bi-tags"></i> Categoria
+            </a>
+        </li>
+
+        
+        <!-- CADASTRO  -->
+        <li class="list-group-item rounded-1 p-0 overflow-hidden ">
+            <a href="{{ route('grupos') }}" class="link-agendar d-flex align-items-center gap-2 p-2">
+                <i class="fas fa-users"></i> Grupo
+            </a>
+        </li>
+
+
+        {{-- <!-- CADASTRAR SERVIÇO -->
+        <li class="list-group-item rounded-1 p-0 overflow-hidden ">
+            <a href="/psicologia/criar-servico" class="link-agendar d-flex align-items-center gap-2 p-2">
+                <i class="bi bi-hammer"></i> Criar Serviço
+            </a>
+        </li> --}}
+
+
+
+
+        <!-- LOGOUT -->
+        <li class="list-group-item mt-auto rounded-1 p-0 overflow-hidden ">
+            <a href="/logout" class="link-logout d-flex align-items-center gap-2 p-2">
+                <i class="fas fa-sign-out-alt"></i>
+                Logout
+            </a>
+        </li>
         </ul>
     </div>
 </div>
