@@ -103,12 +103,17 @@
                         <input type="number" class="form-control" id="quant_min_prod" name="quant_min_prod" value="{{ old('quant_min_prod', 0) }}">
                     </div>
 
-                <div class="col-md-4">
-                    <label for="categoria_id" class="form-label">Categoria <span style="color: red">*</span></label>
-                    <select id="categoria_id" name="categoria_id" class="form-select" disabled>
-                        <option value="">Selecione...</option>
-                    </select>
-                </div>
+                    <div class="col-md-4">
+                        <label for="categoria_id" class="form-label">Categoria <span style="color: red">*</span></label>
+                        <select id="categoria_id" name="categoria_id" class="form-select">
+                            <option value="">Selecione...</option>
+                            @foreach ($categorias as $categoria)
+                                <option value="{{ $categoria->id }}" {{ old('categoria_id') == $categoria->id ? 'selected' : '' }}>
+                                    {{ $categoria->nome }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
 
                 <div class="col-md-4">
                     <label for="grupo_id" class="form-label">Grupo <span style="color: red">*</span></label>
@@ -130,13 +135,18 @@
     <!-- Scripts Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-<script>
+{{-- <script>
 document.getElementById('almox_id').addEventListener('change', function () {
     const almoxId = this.value;
     const categoriaSelect = document.getElementById('categoria_id');
+    const grupoSelect = document.getElementById('grupo_id'); // <- Referência ao grupo
 
     categoriaSelect.innerHTML = '<option value="">Carregando...</option>';
-    categoriaSelect.disabled = true; // Desativa enquanto carrega ou se nada estiver selecionado
+    categoriaSelect.disabled = true;
+
+    // Zera e desativa o grupo sempre que o almoxarifado muda
+    grupoSelect.innerHTML = '<option value="">Selecione...</option>';
+    grupoSelect.disabled = true;//Desativa enquanto carrega ou se nada estiver selecionado
 
     if (almoxId) {
         fetch(`/categorias/almox/${almoxId}`)
@@ -162,7 +172,7 @@ document.getElementById('almox_id').addEventListener('change', function () {
         categoriaSelect.disabled = true;
     }
 });
-</script>
+</script> --}}
 <script>
 document.getElementById('categoria_id').addEventListener('change', function () {
     const categoriaId = this.value;
@@ -190,8 +200,8 @@ document.getElementById('categoria_id').addEventListener('change', function () {
                 grupoSelect.innerHTML = '<option value="">Erro ao carregar</option>';
                 grupoSelect.disabled = true;
             });
-    } else {
-        grupoSelect.innerHTML = '<option value="">Selecione uma categoria</option>';
+    }else {
+        grupoSelect.innerHTML = '<option value="">Selecione...</option>';
         grupoSelect.disabled = true;
     }
 });

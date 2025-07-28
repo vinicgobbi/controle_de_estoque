@@ -2,15 +2,17 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class EstoqueCategoria extends Model
 {
+    use HasFactory;
+
     protected $table = 'estoque_categoria';
 
     protected $fillable = [
-        'nome',
-        'almox_id'
+        'nome'
     ];
 
 }

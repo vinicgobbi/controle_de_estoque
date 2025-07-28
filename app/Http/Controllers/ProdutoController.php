@@ -7,6 +7,7 @@ use App\Models\EstoqueCategoria;
 use App\Models\EstoqueGrupo;
 use Illuminate\Http\Request;
 use App\Models\EstoqueProduto;
+use App\Models\EstoqueUnidade;
 use Illuminate\Support\Facades\DB;
 
 
@@ -18,7 +19,8 @@ class ProdutoController extends Controller
         $almoxarifados = EstoqueAlmoxarifado::all()->toArray();
         $grupos = EstoqueGrupo::all()->toArray();
         $categorias = EstoqueCategoria::all()->toArray();
-        return view('get_produto', compact('produtos', 'almoxarifados', 'grupos', 'categorias'));
+        $unidades = EstoqueUnidade::all()->toArray();
+        return view('get_produto', compact('produtos', 'almoxarifados', 'grupos', 'categorias', 'unidades'));
     }
 
     // GET
@@ -70,6 +72,7 @@ class ProdutoController extends Controller
             'almox_id'       => 'required|integer|exists:estoque_almoxarifado,id',
             'categoria_id'   => 'required|integer|exists:estoque_categoria,id',
             'grupo_id'       => 'required|integer|exists:estoque_grupo,id',
+            'unidade_id'     => 'required|integer|exists:estoque_unidade,id'
         ], [
             'nome_prod.required'    => 'Digite o nome do produto antes de continuar',
             'quant_prod.required'   => 'Digite a quantidade do Produto antes de continuar',
@@ -93,7 +96,7 @@ class ProdutoController extends Controller
         $almoxarifados = EstoqueAlmoxarifado::all();
         $categorias = EstoqueCategoria::all();
         $grupos = EstoqueGrupo::all();
-        return view('edita_produto', compact('produto', 'categorias', 'grupos', 'almoxarifados'));
+        return view('edit_produto', compact('produto', 'categorias', 'grupos', 'almoxarifados'));
     }
 
 

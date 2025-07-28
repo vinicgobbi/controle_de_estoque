@@ -66,6 +66,11 @@
                                             <br>{{ $almoxarifados[$produto['almox_id']-1]['nome'] ?? '-' }}
                                         </li>
                                         <li class="list-group-item">
+                                            <i class="bi bi-puzzle-fill"></i>
+                                            <strong>Unidade:</strong> 
+                                            <br>{{ $unidades[$produto['unidade_id']-1]['nome'] ?? '-' }}
+                                        </li>
+                                        <li class="list-group-item">
                                             <i class="bi bi-archive"></i>
                                             <strong>Quantidade:</strong>
                                             <br><span class="{{ $produto['quant_prod'] < $produto['quant_min_prod'] ? 'text-danger fw-bold' : '' }}">

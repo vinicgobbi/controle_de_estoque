@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class EstoqueProduto extends Model
 {
+    use HasFactory;
+
     protected $table = 'estoque_produto';
 
     protected $fillable = [
@@ -17,5 +20,6 @@ class EstoqueProduto extends Model
     'almox_id',
     'categoria_id',
     'grupo_id',
+    'unidade_id'
     ];
 }

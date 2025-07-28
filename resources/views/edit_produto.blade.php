@@ -9,6 +9,30 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+        <style>
+    #alert-error {
+        animation: slideDownFadeOut 3s ease forwards;
+    }
+
+    @keyframes slideDownFadeOut {
+        0% {
+            transform: translate(-50%, -100%);
+            opacity: 0;
+        }
+        10% {
+            transform: translate(-50%, 0);
+            opacity: 1;
+        }
+        85% {
+            transform: translate(-50%, 0);
+            opacity: 1;
+        }
+        100% {
+            transform: translate(-50%, -100%);
+            opacity: 0;
+        }
+    }
+    </style>
 </head>
 <body>
     @include('components.navbar')
@@ -20,12 +44,12 @@
                     <i class="bi bi-pencil-square me-2"></i>Editar Produto
                 </h3>
 
-                {{-- Exibir erros de validação --}}
                 @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul class="mb-0">
+                    <div id="alert-error" class="alert alert-danger shadow position-fixed top-0 start-50 translate-middle-x mt-3" style="z-index: 1050; max-width: 90%;">
+                        <strong>Ops!</strong> Corrija os itens abaixo:
+                        <ul class="mb-0 mt-1 list-unstyled">
                             @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
+                                <li><i class="fas fa-exclamation-circle me-1"></i> {{ $error }}</li>
                             @endforeach
                         </ul>
                     </div>
@@ -36,7 +60,7 @@
                     @method('PUT')
 
                     <div class="col-md-4">
-                        <label for="nome_prod" class="form-label">Nome do Produto</label>
+                        <label for="nome_prod" class="form-label">Nome do Produto <span style="color: red">*</span></label>
                         <input
                             type="text"
                             class="form-control"
@@ -47,7 +71,7 @@
                     </div>                    
 
                     <div class="col-md-6">
-                        <label for="almox_id" class="form-label">Almoxarifado</label>
+                        <label for="almox_id" class="form-label">Almoxarifado <span style="color: red">*</span></label>
                         <select id="almox_id" name="almox_id" class="form-select">
                             <option value="">Selecione...</option>
                             @foreach ($almoxarifados as $almoxarifado)
@@ -83,18 +107,7 @@
                     </div>
 
                     <div class="col-md-4">
-                        <label for="quant_prod" class="form-label">Quantidade</label>
-                        <input
-                            type="number"
-                            class="form-control"
-                            id="quant_prod"
-                            name="quant_prod"
-                            value="{{ old('quant_prod', $produto->quant_prod) }}"
-                        >
-                    </div>
-
-                    <div class="col-md-4">
-                        <label for="quant_min_prod" class="form-label">Qtd. Mínima</label>
+                        <label for="quant_min_prod" class="form-label">Qtd. Mínima <span style="color: red">*</span></label>
                         <input
                             type="number"
                             class="form-control"
@@ -104,8 +117,8 @@
                         >
                     </div>
 
-                    <div class="col-md-2">
-                        <label for="categoria_id" class="form-label">Categoria</label>
+                    <div class="col-md-4">
+                        <label for="categoria_id" class="form-label">Categoria <span style="color: red">*</span></label>
                         <select id="categoria_id" name="categoria_id" class="form-select">
                             <option value="">Selecione...</option>
                             @foreach ($categorias as $categoria)
@@ -117,8 +130,8 @@
                         </select>
                     </div>
 
-                    <div class="col-md-2">
-                        <label for="grupo_id" class="form-label">Grupo</label>
+                    <div class="col-md-4">
+                        <label for="grupo_id" class="form-label">Grupo <span style="color: red">*</span></label>
                         <select id="grupo_id" name="grupo_id" class="form-select">
                             <option value="">Selecione...</option>
                             @foreach ($grupos as $grupo)
@@ -142,5 +155,76 @@
 
     <!-- Bootstrap Bundle JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+{{-- <script>
+document.getElementById('almox_id').addEventListener('change', function () {
+    const almoxId = this.value;
+    const categoriaSelect = document.getElementById('categoria_id');
+    const grupoSelect = document.getElementById('grupo_id'); // <- Referência ao grupo
+
+    categoriaSelect.innerHTML = '<option value="">Carregando...</option>';
+    categoriaSelect.disabled = true;
+
+    // Zera e desativa o grupo sempre que o almoxarifado muda
+    grupoSelect.innerHTML = '<option value="">Selecione...</option>';
+    grupoSelect.disabled = true;//Desativa enquanto carrega ou se nada estiver selecionado
+
+    if (almoxId) {
+        fetch(`/categorias/almox/${almoxId}`)
+            .then(response => response.json())
+            .then(data => {
+                categoriaSelect.innerHTML = '<option value="">Selecione...</option>';
+
+                data.forEach(function (categoria) {
+                    const option = document.createElement('option');
+                    option.value = categoria.id;
+                    option.textContent = categoria.nome;
+                    categoriaSelect.appendChild(option);
+                });
+
+                categoriaSelect.disabled = false; // Habilita após carregar
+            })
+            .catch(() => {
+                categoriaSelect.innerHTML = '<option value="">Erro ao carregar</option>';
+                categoriaSelect.disabled = true;
+            });
+    } else {
+        categoriaSelect.innerHTML = '<option value="">Selecione...</option>';
+        categoriaSelect.disabled = true;
+    }
+});
+</script> --}}
+<script>
+document.getElementById('categoria_id').addEventListener('change', function () {
+    const categoriaId = this.value;
+    const grupoSelect = document.getElementById('grupo_id');
+
+    grupoSelect.innerHTML = '<option value="">Carregando...</option>';
+    grupoSelect.disabled = true;
+
+    if (categoriaId) {
+        fetch(`/grupos/categoria/${categoriaId}`)
+            .then(response => response.json())
+            .then(data => {
+                grupoSelect.innerHTML = '<option value="">Selecione...</option>';
+
+                data.forEach(function (grupo) {
+                    const option = document.createElement('option');
+                    option.value = grupo.id;
+                    option.textContent = grupo.nome;
+                    grupoSelect.appendChild(option);
+                });
+
+                grupoSelect.disabled = false;
+            })
+            .catch(() => {
+                grupoSelect.innerHTML = '<option value="">Erro ao carregar</option>';
+                grupoSelect.disabled = true;
+            });
+    }else {
+        grupoSelect.innerHTML = '<option value="">Selecione...</option>';
+        grupoSelect.disabled = true;
+    }
+});
+</script>
 </body>
 </html>

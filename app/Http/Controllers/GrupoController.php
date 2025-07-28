@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EstoqueCategoria;
 use App\Models\EstoqueGrupo;
 use Illuminate\Http\Request;
 
@@ -10,7 +11,8 @@ class GrupoController extends Controller
     public function getGrupo()
     {
         $grupos = EstoqueGrupo::all();
-        return view('get_grupo', compact('grupos'));
+        $categorias = EstoqueCategoria::all()->toArray();
+        return view('get_grupo', compact('grupos', 'categorias'));
     }
 
     public function getGrupoPorCategoria($categoria_id)

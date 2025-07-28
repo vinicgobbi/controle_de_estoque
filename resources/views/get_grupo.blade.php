@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Consulta de Categorias</title>
+    <title>Consulta de Grupos</title>
     <link rel="icon" type="image/png" href="{{ asset('faesa_favicon.png') }}" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.min.css" rel="stylesheet" />
@@ -53,6 +53,9 @@
                                 <div class="card-body">
                                     <h5 class="card-title text-primary-emphasis">
                                         <i class="bi bi-diagram-3"></i> {{ $grupo->nome }}
+                                    </h5>
+                                    <h5 class="card-subtitle mb-2 text-secondary">
+                                       <i class="bi bi-tags"></i> {{ $categorias[$grupo->categoria_id-1]['nome'] }} 
                                     </h5>
                                 </div>
                             </div>
