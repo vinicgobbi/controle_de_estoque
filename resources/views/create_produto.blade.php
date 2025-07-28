@@ -98,12 +98,12 @@
                         <input type="text" class="form-control" id="desc_prod" name="desc_prod" value="{{ old('desc_prod') }}">
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <label for="quant_min_prod" class="form-label">Qtd. Mínima</label>
                         <input type="number" class="form-control" id="quant_min_prod" name="quant_min_prod" value="{{ old('quant_min_prod', 0) }}">
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <label for="categoria_id" class="form-label">Categoria <span style="color: red">*</span></label>
                         <select id="categoria_id" name="categoria_id" class="form-select">
                             <option value="">Selecione...</option>
@@ -115,12 +115,24 @@
                         </select>
                     </div>
 
-                <div class="col-md-4">
-                    <label for="grupo_id" class="form-label">Grupo <span style="color: red">*</span></label>
-                        <select id="grupo_id" name="grupo_id" class="form-select" disabled>
+                    <div class="col-md-4">
+                        <label for="grupo_id" class="form-label">Grupo <span style="color: red">*</span></label>
+                            <select id="grupo_id" name="grupo_id" class="form-select" disabled>
+                                <option value="">Selecione...</option>
+                            </select>
+                    </div>
+
+                    <div class="col-md-2">
+                        <label for="unidade_id" class="form-label">Unidade <span style="color: red">*</span></label>
+                        <select id="unidade_id" name="unidade_id" class="form-select">
                             <option value="">Selecione...</option>
+                            @foreach ($unidades as $unidade)
+                                <option value="{{ $unidade->id }}" {{ old('unidade_id') == $unidade->id ? 'selected' : '' }}>
+                                    {{ $unidade->nome }}
+                                </option>
+                            @endforeach
                         </select>
-                </div>
+                    </div>
 
                     <div class="col-12 mt-3">
                         <button type="submit" class="btn btn-success">

@@ -39,11 +39,13 @@ class ProdutoController extends Controller
             'almox_id'       => 'required|integer|exists:estoque_almoxarifado,id',
             'categoria_id'   => 'required|integer|exists:estoque_categoria,id',
             'grupo_id'       => 'required|integer|exists:estoque_grupo,id',
+            'unidade_id'     => 'required|integer|exists:estoque_unidade,id'
         ], [
             'nome_prod.required'    => 'Digite o nome do produto antes de continuar',
             'almox_id.required'     => 'Informe em qual almoxarifado o produto vai estar antes de continuar',
             'categoria_id.required' => 'Defina um categoria antes de continuar',
             'grupo_id.required'     => 'Defina um grupo antes de continuar',
+            'unidade_id.required'   => 'Defina uma unidade antes de começar'
         ]);
 
         $produto = new EstoqueProduto($validated);
