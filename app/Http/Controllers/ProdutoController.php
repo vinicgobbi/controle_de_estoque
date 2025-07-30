@@ -20,7 +20,7 @@ class ProdutoController extends Controller
         $grupos = EstoqueGrupo::all()->toArray();
         $categorias = EstoqueCategoria::all()->toArray();
         $unidades = EstoqueUnidade::all()->toArray();
-        return view('get_produto', compact('produtos', 'almoxarifados', 'grupos', 'categorias', 'unidades'));
+        return view('produto.get_produto', compact('produtos', 'almoxarifados', 'grupos', 'categorias', 'unidades'));
     }
 
     // GET
@@ -98,7 +98,7 @@ class ProdutoController extends Controller
         $almoxarifados = EstoqueAlmoxarifado::all();
         $categorias = EstoqueCategoria::all();
         $grupos = EstoqueGrupo::all();
-        return view('edit_produto', compact('produto', 'categorias', 'grupos', 'almoxarifados'));
+        return view('produto.edit_produto', compact('produto', 'categorias', 'grupos', 'almoxarifados'));
     }
 
 

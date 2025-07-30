@@ -11,7 +11,7 @@ class CategoriaController extends Controller
     {
         $categorias = EstoqueCategoria::all();
         $almoxarifados = EstoqueAlmoxarifado::all()->toArray();
-        return view('get_categoria', compact('categorias', 'almoxarifados'));
+        return view('categoria.get_categoria', compact('categorias', 'almoxarifados'));
     }
 
     public function getCategoriaPorAlmox($almox_id)

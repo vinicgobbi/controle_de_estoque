@@ -10,7 +10,7 @@ class AlmoxarifadoController extends Controller
     public function getAlmoxarifado()
     {
         $almoxarifados = EstoqueAlmoxarifado::all();
-        return view('get_almoxarifado', compact('almoxarifados'));
+        return view('almoxarifado.get_almoxarifado', compact('almoxarifados'));
     }
 
     public function createAlmoxarifado(Request $request)

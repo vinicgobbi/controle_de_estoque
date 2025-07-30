@@ -12,7 +12,7 @@ class GrupoController extends Controller
     {
         $grupos = EstoqueGrupo::all();
         $categorias = EstoqueCategoria::all()->toArray();
-        return view('get_grupo', compact('grupos', 'categorias'));
+        return view('grupo.get_grupo', compact('grupos', 'categorias'));
     }
 
     public function getGrupoPorCategoria($categoria_id)
