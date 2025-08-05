@@ -97,14 +97,14 @@
 <div id="main-container" class="d-flex vh-100">
 
 <!-- SIDEBAR DESKTOP -->
-<nav class="p-3 d-none d-lg-flex flex-column align-items-center" style="width: 250px; background-color: var(--blue-color);">
+<nav class="p-3 d-none d-lg-flex flex-column align-items-center" style="width: 300px; background-color: var(--blue-color);">
 
     <!-- LOGO DA FAESA - NAVBAR -->
     <img src="{{ asset('faesa_branco.png') }}" alt="Logo" class="img-fluid mb-2" />
 
     <!-- TITULO SIDEBAR -->
     <h4 class="mb-5 mt-5 p-2 rounded-3"
-        style="background-color: var(--secondary-color); color: white;">
+        style="color: white;">
         <strong>Estoque</strong>
     </h4>
 
@@ -112,21 +112,21 @@
     <ul class="list-group list-group-flush w-100 gap-1">
         <!-- LINKS -->
 
-        <!-- LISTAGEM DE PRODUTOS -->
+        <!-- TELA DE PRODUTO -->
         <li class="list-group-item rounded-1 p-0 overflow-hidden ">
             <a href="{{ route('index') }}" class="link-agendar d-flex align-items-center gap-2 p-2">
                 <i class="bi bi-box-seam"></i> Produto
             </a>
         </li>
 
-        <!-- LISTAGEM DE PRODUTOS -->
+        <!-- TELA DE ALMOXARIFADO -->
         <li class="list-group-item rounded-1 p-0 overflow-hidden ">
             <a href="{{ route('almoxarifados') }}" class="link-agendar d-flex align-items-center gap-2 p-2">
                 <i class="bi bi-building"></i> Almoxarifado
             </a>
         </li>
 
-        <!-- CADASTRAR CATEGORIA -->
+        <!-- TELA DE CATEGORIA -->
         <li class="list-group-item rounded-1 p-0 overflow-hidden ">
             <a href="{{ route('categorias') }}" class="link-agendar d-flex align-items-center gap-2 p-2">
                 <i class="bi bi-tags"></i> Categoria
@@ -134,23 +134,19 @@
         </li>
 
         
-        <!-- CADASTRO  -->
+        <!-- TELA DE GRUPO  -->
         <li class="list-group-item rounded-1 p-0 overflow-hidden ">
             <a href="{{ route('grupos') }}" class="link-agendar d-flex align-items-center gap-2 p-2">
                 <i class="fas fa-users"></i> Grupo
             </a>
         </li>
 
-
-        {{-- <!-- CADASTRAR SERVIÇO -->
+        <!-- TELA DE UNIDADE  -->
         <li class="list-group-item rounded-1 p-0 overflow-hidden ">
-            <a href="/psicologia/criar-servico" class="link-agendar d-flex align-items-center gap-2 p-2">
-                <i class="bi bi-hammer"></i> Criar Serviço
+            <a href="{{ route('unidades') }}" class="link-agendar d-flex align-items-center gap-2 p-2">
+                <i class="bi bi-archive-fill"></i> Unidade
             </a>
-        </li> --}}
-
-
-
+        </li>
 
         <!-- LOGOUT -->
         <li class="list-group-item mt-auto rounded-1 p-0 overflow-hidden ">
@@ -170,9 +166,11 @@
         <h5 class="offcanvas-title text-white" id="offcanvasMenuLabel">Menu</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Fechar"></button>
     </div>
+
     <div class="offcanvas-body p-0" style="background-color: var(--light-color);">
         <ul class="list-group list-group-flush w-100">
-            <!-- MESMOS LINKS DO SIDEBAR -->
+        <!-- MESMOS LINKS DO SIDEBAR -->
+
         <!-- LISTAGEM DE PRODUTOS -->
         <li class="list-group-item rounded-1 p-0 overflow-hidden ">
             <a href="{{ route('index') }}" class="link-agendar d-flex align-items-center gap-2 p-2">
@@ -180,14 +178,14 @@
             </a>
         </li>
 
-        <!-- LISTAGEM DE PRODUTOS -->
+        <!-- TELA DE ALMOXARIFADO -->
         <li class="list-group-item rounded-1 p-0 overflow-hidden ">
             <a href="{{ route('almoxarifados') }}" class="link-agendar d-flex align-items-center gap-2 p-2">
                 <i class="bi bi-building"></i> Almoxarifado
             </a>
         </li>
 
-        <!-- CADASTRAR CATEGORIA -->
+        <!-- TELA DE CATEGORIA -->
         <li class="list-group-item rounded-1 p-0 overflow-hidden ">
             <a href="{{ route('categorias') }}" class="link-agendar d-flex align-items-center gap-2 p-2">
                 <i class="bi bi-tags"></i> Categoria
@@ -195,22 +193,19 @@
         </li>
 
         
-        <!-- CADASTRO  -->
+        <!-- TELA DE GRUPO  -->
         <li class="list-group-item rounded-1 p-0 overflow-hidden ">
             <a href="{{ route('grupos') }}" class="link-agendar d-flex align-items-center gap-2 p-2">
                 <i class="fas fa-users"></i> Grupo
             </a>
         </li>
 
-
-        {{-- <!-- CADASTRAR SERVIÇO -->
+        <!-- TELA DE UNIDADE  -->
         <li class="list-group-item rounded-1 p-0 overflow-hidden ">
-            <a href="/psicologia/criar-servico" class="link-agendar d-flex align-items-center gap-2 p-2">
-                <i class="bi bi-hammer"></i> Criar Serviço
+            <a href="{{ route('unidades') }}" class="link-agendar d-flex align-items-center gap-2 p-2">
+                <i class="bi bi-archive-fill"></i> Unidade
             </a>
-        </li> --}}
-
-
+        </li>
 
 
         <!-- LOGOUT -->
