@@ -13,7 +13,6 @@ class EstoqueProduto extends Model
 
     protected $fillable = [
     'nome_prod',
-    'cod_prod',
     'desc_prod',
     'quant_prod',
     'quant_min_prod',
