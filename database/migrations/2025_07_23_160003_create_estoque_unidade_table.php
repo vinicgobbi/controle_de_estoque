@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('estoque_unidade', function (Blueprint $table) {
             $table->id();
             $table->string('nome',3);
+            $table->string('descricao', 255);
             $table->timestamps();
         });
     }
