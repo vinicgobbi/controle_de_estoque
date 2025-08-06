@@ -12,6 +12,7 @@ class EstoqueUnidade extends Model
     protected $table = 'estoque_unidade';
 
     protected $fillable = [
-        'nome'
+        'nome',
+        'descricao'
     ];
 }

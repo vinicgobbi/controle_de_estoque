@@ -5,25 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Consulta de Unidades</title>
     <link rel="icon" type="image/png" href="{{ asset('faesa_favicon.png') }}" />
+    
+    <!-- Importa a fonte Montserrat -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <!-- Bootstrap e Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 
     <style>
+        body {
+            font-family: "Montserrat", sans-serif;
+        }
         html, body {
             height: 100%;
             margin: 0;
         }
         #content-wrapper {
-            height: calc(100vh - 56px);
+            width: 85vw;
+            height: 97vh;
+            margin: auto;
+            display: column;
+            gap: 24px;
             overflow-y: auto;
-            padding: 16px;
-            display: flex;
-            flex-direction: column;
             align-items: stretch;
-            width: 100%;
-            background-color: #f8f9fa;
-        }
+        }   
         .card .list-group-item {
             font-size: 0.95rem;
         }
@@ -40,7 +46,7 @@
 			<!-- Bloco de Título e Botão -->
             <div class="w-100 d-flex justify-content-between align-items-center mb-3">
                 <h5 class="mb-0">Unidades Encontradas</h5>
-                <a href="{{ route('criar-unidade') }}" class="btn btn-sm btn-success">
+                <a href="{{ route('criar-unidade') }}" class="btn btn-sm btn-success fs-6">
                     <i class="bi bi-plus-circle"></i> Nova Unidade
 				</a>
             </div>
@@ -52,7 +58,10 @@
                             <div class="card h-100 shadow-sm border-0">
                                 <div class="card-body">
                                     <h5 class="card-title text-primary-emphasis">
-                                        <i class="bi bi-tags"></i> {{ $unidade->nome }}
+                                        <i class="bi bi-tags"></i> {{ $unidade->descricao }}
+                                    </h5>
+                                    <h5 class="card-subtitle mb-2 text-secondary">
+                                        {{ $unidade->nome }} 
                                     </h5>
                                 </div>
                             </div>
