@@ -34,5 +34,10 @@ return [
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
+    
+    'faesa' => [
+        'api_url' => env('FAESA_API_URL'),
+        'api_key' => env('FAESA_API_KEY'),
+    ]
 
 ];
