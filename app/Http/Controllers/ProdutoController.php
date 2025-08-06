@@ -33,7 +33,6 @@ class ProdutoController extends Controller
     {
         $validated = $request->validate([
             'nome_prod'      => 'required|string|max:50',
-            'cod_prod'       => 'nullable|string|size:6|regex:/^\d{6}$/|unique:estoque_produto,cod_prod',
             'desc_prod'      => 'nullable|string|max:255',
             'quant_min_prod' => 'nullable|integer|min:0',
             'almox_id'       => 'required|integer|exists:estoque_almoxarifado,id',
@@ -48,16 +47,7 @@ class ProdutoController extends Controller
             'unidade_id.required'   => 'Defina uma unidade antes de começar'
         ]);
 
-        $produto = new EstoqueProduto($validated);
-
-        // Se cod_prod não foi informado, gerar código com base no próximo ID
-        if (empty($validated['cod_prod'])) {
-            // Recupera o próximo ID futuro com base no AUTO_INCREMENT
-            $nextId = DB::table('estoque_produto')->max('id') + 1;
-            $produto->cod_prod = str_pad($nextId, 6, '0', STR_PAD_LEFT);
-        }
-
-        $produto->save();
+        EstoqueProduto::create($validated);
 
         return redirect()->route('index')->with('success', 'Produto criado com sucesso.');
     }
@@ -67,7 +57,6 @@ class ProdutoController extends Controller
         // Validação dos dados
         $validated = $request->validate([
             'nome_prod'      => 'required|string|max:50',
-            'cod_prod'       => 'nullable|string|size:6|regex:/^\d{6}$/|unique:estoque_produto,cod_prod',
             'desc_prod'      => 'nullable|string|max:255',
             'quant_prod'     => 'integer|min:0',
             'quant_min_prod' => 'nullable|integer|min:0',
@@ -98,7 +87,8 @@ class ProdutoController extends Controller
         $almoxarifados = EstoqueAlmoxarifado::all();
         $categorias = EstoqueCategoria::all();
         $grupos = EstoqueGrupo::all();
-        return view('produto.edit_produto', compact('produto', 'categorias', 'grupos', 'almoxarifados'));
+        $unidades = EstoqueUnidade::all();
+        return view('produto.edit_produto', compact('produto', 'categorias', 'grupos', 'almoxarifados', 'unidades'));
     }
 
 
