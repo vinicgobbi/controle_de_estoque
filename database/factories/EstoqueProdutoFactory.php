@@ -27,7 +27,6 @@ class EstoqueProdutoFactory extends Factory
         
         return [
             'nome_prod' => fake()->word(),
-            'cod_prod' => null,
             'desc_prod' => fake()->word(),
             'quant_prod' => 0,
             'quant_min_prod' => fake()->numberBetween(0,100),
@@ -36,13 +35,5 @@ class EstoqueProdutoFactory extends Factory
             'grupo_id' => null,
             'unidade_id' => null
         ];
-    }
-
-    public function configure(): static
-    {
-        return $this->afterCreating(function (EstoqueProduto $produto) {
-            $produto->cod_prod = str_pad($produto->id, 6, '0', STR_PAD_LEFT);
-            $produto->save();
-        });
     }
 }

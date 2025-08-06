@@ -21,7 +21,8 @@ class EstoqueUnidadeFactory extends Factory
     public function definition(): array
     {
         return [
-            'nome' => fake()->lexify(str_repeat('?', 3))
+            'nome' => fake()->lexify(str_repeat('?', 3)),
+            'descricao' => fake()->word()
         ];
     }
 }
