@@ -20,7 +20,7 @@
     }
 
     :root {
-        --blue-color: #085ca4;
+        --blue-color: #2596be;
         --secondary-color: #7aacce;
         --third-color: #fc7c34;
         --light-color: #ecf5f9;
@@ -86,18 +86,18 @@
 </style>
 
 
-<nav class="navbar navbar-dark bg-primary d-lg-none fixed-top" style="height: 56px; padding-left: 1rem;">
-    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu">
+<nav class="navbar navbar-dark bg-primary d-lg-none fixed-top shadow-sm px-3" style="height: 56px">
+    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu">
         <i class="fas fa-bars"></i>
     </button>
-    <img src="{{ asset('faesa_branco.png') }}" id="faesa_icone_branco" alt="" style="margin: auto; display: block; width: 120px;">
-    <span class="navbar-brand mb-0 h1 ms-2">Estoque</span>
+    <img src="{{ asset('faesa_branco.png') }}" alt="Logo FAESA" class="mx-auto d-block" style="width: 100px;">
 </nav>
+
 
 <div id="main-container" class="d-flex vh-100">
 
 <!-- SIDEBAR DESKTOP -->
-<nav class="p-3 d-none d-lg-flex flex-column align-items-center" style="width: 300px; background-color: var(--blue-color);">
+<nav class="p-3 d-none d-lg-flex flex-column align-items-center" style="width: 250px; background-color: var(--blue-color);">
 
     <!-- LOGO DA FAESA - NAVBAR -->
     <img src="{{ asset('faesa_branco.png') }}" alt="Logo" class="img-fluid mb-2" />
@@ -108,16 +108,8 @@
         <strong>Estoque</strong>
     </h4>
 
-
     <ul class="list-group list-group-flush w-100 gap-1">
         <!-- LINKS -->
-
-        <!-- TELA DE PRODUTO -->
-        <li class="list-group-item rounded-1 p-0 overflow-hidden ">
-            <a href="{{ route('index') }}" class="link-agendar d-flex align-items-center gap-2 p-2">
-                <i class="bi bi-box-seam"></i> Produto
-            </a>
-        </li>
 
         <!-- TELA DE ALMOXARIFADO -->
         <li class="list-group-item rounded-1 p-0 overflow-hidden ">
@@ -147,6 +139,21 @@
                 <i class="bi bi-archive-fill"></i> Unidade
             </a>
         </li>
+
+        <!-- TELA DE PRODUTO -->
+        <li class="list-group-item rounded-1 p-0 overflow-hidden ">
+            <a href="{{ route('index') }}" class="link-agendar d-flex align-items-center gap-2 p-2">
+                <i class="bi bi-box-seam"></i> Produto
+            </a>
+        </li>
+
+        <!-- TELA DE MOVIMENTACAO -->
+        <li class="list-group-item rounded-1 p-0 overflow-hidden ">
+            <a href="{{ route('movimentacoes') }}" class="link-agendar d-flex align-items-center gap-2 p-2">
+                <i class="bi bi-arrow-left-right"></i> Movimentação
+            </a>
+        </li>
+
 
         <!-- LOGOUT -->
         <li class="list-group-item mt-auto rounded-1 p-0 overflow-hidden ">
@@ -166,18 +173,9 @@
         <h5 class="offcanvas-title text-white" id="offcanvasMenuLabel">Menu</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Fechar"></button>
     </div>
-
     <div class="offcanvas-body p-0" style="background-color: var(--light-color);">
         <ul class="list-group list-group-flush w-100">
-        <!-- MESMOS LINKS DO SIDEBAR -->
-
-        <!-- LISTAGEM DE PRODUTOS -->
-        <li class="list-group-item rounded-1 p-0 overflow-hidden ">
-            <a href="{{ route('index') }}" class="link-agendar d-flex align-items-center gap-2 p-2">
-                <i class="bi bi-box-seam"></i> Produto
-            </a>
-        </li>
-
+            <!-- MESMOS LINKS DO SIDEBAR -->
         <!-- TELA DE ALMOXARIFADO -->
         <li class="list-group-item rounded-1 p-0 overflow-hidden ">
             <a href="{{ route('almoxarifados') }}" class="link-agendar d-flex align-items-center gap-2 p-2">
@@ -204,6 +202,13 @@
         <li class="list-group-item rounded-1 p-0 overflow-hidden ">
             <a href="{{ route('unidades') }}" class="link-agendar d-flex align-items-center gap-2 p-2">
                 <i class="bi bi-archive-fill"></i> Unidade
+            </a>
+        </li>
+
+        <!-- TELA DE PRODUTO -->
+        <li class="list-group-item rounded-1 p-0 overflow-hidden ">
+            <a href="{{ route('index') }}" class="link-agendar d-flex align-items-center gap-2 p-2">
+                <i class="bi bi-box-seam"></i> Produto
             </a>
         </li>
 
