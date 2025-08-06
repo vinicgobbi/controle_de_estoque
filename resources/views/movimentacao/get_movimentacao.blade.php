@@ -66,7 +66,7 @@
                         </div>
                     @empty
                         <div class="col-12">
-                            <div class="alert alert-warning text-center">Nenhum grupo encontrado.</div>
+                            <div class="alert alert-warning text-center">Nenhuma movimentação encontrada.</div>
                         </div>
                     @endforelse
                 </div>
