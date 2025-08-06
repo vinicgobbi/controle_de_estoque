@@ -32,6 +32,28 @@
             align-items: stretch;
         }
 
+        #alert-error {
+            animation: slideDownFadeOut 3s ease forwards;
+        }
+
+        @keyframes slideDownFadeOut {
+            0% {
+                transform: translate(-50%, -100%);
+                opacity: 0;
+            }
+            10% {
+                transform: translate(-50%, 0);
+                opacity: 1;
+            }
+            85% {
+                transform: translate(-50%, 0);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -100%);
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 <body>
@@ -56,6 +78,13 @@
                         </div>
                     @endif
 
+
+                    @if(session('error'))
+                        <div id="alert-error" class="alert alert-danger shadow position-fixed top-0 start-50 translate-middle-x mt-3" style="z-index: 1050; max-width: 90%;">
+                            <i class="fas fa-exclamation-circle me-1"></i> {{ session('error') }}
+                        </div>
+                    @endif
+
                     <form action="{{ route('create-movimentacao') }}" method="POST" class="row g-3">
                         @csrf
 
@@ -77,8 +106,8 @@
                             <label for="tipo" class="form-label">Tipo <span style="color: red">*</span></label>
                             <select id="tipo" name="tipo" class="form-select">
                                 <option value="">Selecione...</option>
-                                <option value="Entrada">Entrada</option>
-								<option value="Saida">Saida</option>
+                                <option value="Entrada" {{ old('tipo') == 'Entrada' ? 'selected' : '' }}>Entrada</option>
+                                <option value="Saida" {{ old('tipo') == 'Saida' ? 'selected' : '' }}>Saída</option>
                             </select>
                         </div>
 

@@ -30,12 +30,28 @@ class MovimentacaoController extends Controller
 
         $produto = EstoqueProduto::findOrFail($validated['produto_id']);
 
-        EstoqueMovimentacao::create($validated);
+        
 
         if ($validated['tipo'] == 'Entrada') {
             $produto->quant_prod += $validated['quantidade'];
+            EstoqueMovimentacao::create($validated);
         } else {
-           $produto->quant_prod -= $validated['quantidade']; 
+            if ($produto->quant_prod <= 0) {
+                return redirect()
+                ->route('create-movimentacao')
+                ->with('error', 'Não é possível realizar a saída de um item sem estoque')
+                ->withInput();
+            }
+            else if ($produto->quant_prod - $validated['quantidade'] <= 0) {
+                return redirect()
+                ->route('create-movimentacao')
+                ->with('error', 'O saldo não é suficiente para realizar essa saída')
+                ->withInput();
+            }else {
+                $produto->quant_prod -= $validated['quantidade'];
+                EstoqueMovimentacao::create($validated);   
+            }
+           
         }
 
         $produto->save();

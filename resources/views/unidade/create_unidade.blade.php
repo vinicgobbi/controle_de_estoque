@@ -83,7 +83,7 @@
 
                         <div class="col-md-4">
                             <label for="nome" class="form-label">Nome da Unidade <span style="color: red">*</span></label>
-                            <input placeholder="Ex: Kg" type="text" class="form-control" id="nome" name="nome" value="{{ old('nome') }}">
+                            <input placeholder="Ex: Kg" type="text" class="form-control" id="nome" name="nome" value="{{ old('nome') }}" maxlength="3">
                         </div>
 
                         <div class="col-md-4">
