@@ -54,7 +54,6 @@ class ProdutoController extends Controller
         $validated = $request->validate([
             'nome_prod'      => 'required|string|max:50',
             'desc_prod'      => 'nullable|string|max:255',
-            'quant_prod'     => 'integer|min:0',
             'quant_min_prod' => 'nullable|integer|min:0',
             'almox_id'       => 'required|integer|exists:estoque_almoxarifado,id',
             'categoria_id'   => 'required|integer|exists:estoque_categoria,id',
@@ -62,7 +61,6 @@ class ProdutoController extends Controller
             'unidade_id'     => 'required|integer|exists:estoque_unidade,id'
         ], [
             'nome_prod.required'    => 'Digite o nome do produto antes de continuar',
-            'quant_prod.required'   => 'Digite a quantidade do Produto antes de continuar',
             'almox_id.required'     => 'Informe em qual almoxarifado o produto vai estar antes de continuar',
             'categoria_id.required' => 'Defina um categoria antes de continuar',
             'grupo_id.required'     => 'Defina um grupo antes de continuar',

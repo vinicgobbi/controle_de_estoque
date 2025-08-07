@@ -75,13 +75,6 @@
                                             <br>  {{ $unidades[$produto['unidade_id']-1]['descricao'] ?? '-' }} ({{ $unidades[$produto['unidade_id']-1]['nome'] ?? '-' }})
                                         </li>
                                         <li class="list-group-item">
-                                            <i class="bi bi-archive"></i>
-                                            <strong>Quantidade:</strong>
-                                            <br><span class="{{ $produto['quant_prod'] < $produto['quant_min_prod'] ? 'text-danger fw-bold' : '' }}">
-                                                {{ $produto['quant_prod'] }}
-                                            </span>
-                                        </li>
-                                        <li class="list-group-item">
                                             <i class="bi bi-exclamation-circle"></i>
                                             <strong>Qtd. Mínima:</strong>
                                             <br>{{ $produto['quant_min_prod'] }}

@@ -89,7 +89,8 @@ Route::middleware([AuthMiddleware::class])->group(function () {
 	Route::post('/movimentacoes/criar', [MovimentacaoController::class, 'createMovimentacao'])->name('create-movimentacao');
 	Route::get('/movimentacoes/criar', function (){
 		$produtos = EstoqueProduto::all();
-		return view('movimentacao.create_movimentacao', compact('produtos'));
+		$almoxarifados = EstoqueAlmoxarifado::all();
+		return view('movimentacao.create_movimentacao', compact('produtos', 'almoxarifados'));
 	})->name('criar-movimentacao');
 
 });

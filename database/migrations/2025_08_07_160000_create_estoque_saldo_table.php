@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('estoque_usuario', function (Blueprint $table) {
+        Schema::create('estoque_saldo', function (Blueprint $table) {
             $table->id();
-            $table->string('id_usuario_estoque');
-            $table->integer('ativo');
+            $table->foreignId('produto_id')->constrained('estoque_produto');
+            $table->foreignId('almoxarifado_id')->constrained('estoque_almoxarifado');
+            $table->integer('saldo');
+            $table->timestamps();
         });
     }
 
@@ -23,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('estoque_usuario');
+        Schema::dropIfExists('estoque_saldo');
     }
 };

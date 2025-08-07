@@ -102,6 +102,19 @@
                             </select>
                         </div>
 
+                        <div class="col-md-5">
+                            <label for="almoxarifado_id" class="form-label">Almoxarifado <span style="color: red">*</span></label>
+                            <select id="almoxarifado_id" name="almoxarifado_id" class="form-select">
+								
+                                <option value="">Selecione...</option>
+                                @foreach ($almoxarifados as $almoxarifado)
+                                    <option value="{{ $almoxarifado->id }}" {{ old('almoxarifado_id') == $almoxarifado->id ? 'selected' : '' }}>
+                                        {{ $almoxarifado->nome }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
                         <div class="col-md-3">
                             <label for="tipo" class="form-label">Tipo <span style="color: red">*</span></label>
                             <select id="tipo" name="tipo" class="form-select">
@@ -112,8 +125,8 @@
                         </div>
 
 						<div class="col-md-2">
-                            <label for="quantidade" class="form-label">Quantidade <span style="color: red">*</span></label>
-                            <input type="number" class="form-control" id="quantidade" name="quantidade" value="{{ old('quantidade', 0) }}">
+                            <label for="saldo" class="form-label">Quantidade <span style="color: red">*</span></label>
+                            <input type="number" class="form-control" id="saldo" name="saldo" value="{{ old('saldo', 0) }}">
                         </div>
 
                         <div class="col-12 mt-3">

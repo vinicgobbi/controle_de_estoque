@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class EstoqueMovimentacao extends Model
+class EstoqueSaldo extends Model
 {
-    protected $table = 'estoque_movimentacao';
+    protected $table = 'estoque_saldo';
 
     protected $fillable = [
-        'tipo',
         'produto_id',
         'almoxarifado_id',
         'saldo'
     ];
+
 }

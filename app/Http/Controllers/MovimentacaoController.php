@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EstoqueAlmoxarifado;
 use App\Models\EstoqueMovimentacao;
 use App\Models\EstoqueProduto;
+use App\Models\EstoqueSaldo;
 use Illuminate\Http\Request;
 
 class MovimentacaoController extends Controller
@@ -12,6 +14,7 @@ class MovimentacaoController extends Controller
     {
         $movimentacoes = EstoqueMovimentacao::all();
         $produtos = EstoqueProduto::all()->toArray();
+        $almoxarifados = EstoqueAlmoxarifado::all()->toArray();
         return view('movimentacao.get_movimentacao', compact('movimentacoes', 'produtos'));
     }
 
@@ -19,42 +22,56 @@ class MovimentacaoController extends Controller
     {
         $validated = $request->validate([
             'produto_id' => 'required|integer',
+            'almoxarifado_id' => 'required|integer',
             'tipo' => 'required|string',
-            'quantidade' => 'required|integer|min:1',
+            'saldo' => 'required|integer|min:1|max:500',
         ],[
-            'produto_id.required' => 'Selecione um produto antes de continuar',
+            'produto_id.required' => 'Selecione um saldo antes de continuar',
             'tipo.required' => 'Selecione o tipo de movimentação para prosseguir',
-            'quantidade.required' => 'Informe uma quantidade para poder realizar a movimentação',
-            'quantidade.min' => 'Informe uma quantidade para poder realizar a movimentação'
+            'saldo.required' => 'Informe uma saldo para poder realizar a movimentação',
+            'saldo.min' => 'Informe uma saldo para poder realizar a movimentação',
+            'saldo.max' => 'A saldo informada ultrapassou o limite permitido por movimentação'
         ]);
 
-        $produto = EstoqueProduto::findOrFail($validated['produto_id']);
+        $saldo = EstoqueSaldo::where('produto_id', $validated['produto_id'])
+            ->where('almoxarifado_id', $validated['almoxarifado_id'])
+            ->first();
 
         
 
         if ($validated['tipo'] == 'Entrada') {
-            $produto->quant_prod += $validated['quantidade'];
+            if (!$saldo) {
+                $saldo = EstoqueSaldo::create($validated);
+            }
+            $saldo->saldo += $validated['saldo'];
             EstoqueMovimentacao::create($validated);
         } else {
-            if ($produto->quant_prod <= 0) {
+            if (!$saldo) {
                 return redirect()
                 ->route('create-movimentacao')
                 ->with('error', 'Não é possível realizar a saída de um item sem estoque')
                 ->withInput();
             }
-            else if ($produto->quant_prod - $validated['quantidade'] <= 0) {
+
+            if ($saldo->saldo <= 0) {
+                return redirect()
+                ->route('create-movimentacao')
+                ->with('error', 'Não é possível realizar a saída de um item sem estoque')
+                ->withInput();
+            }
+            else if ($saldo->saldo - $validated['saldo'] <= 0) {
                 return redirect()
                 ->route('create-movimentacao')
                 ->with('error', 'O saldo não é suficiente para realizar essa saída')
                 ->withInput();
             }else {
-                $produto->quant_prod -= $validated['quantidade'];
+                $saldo->saldo -= $validated['saldo'];
                 EstoqueMovimentacao::create($validated);   
             }
            
         }
 
-        $produto->save();
+        $saldo->save();
 
         return redirect()->route('movimentacoes')->with('success', 'Movimentação gerada com sucesso');
     }
