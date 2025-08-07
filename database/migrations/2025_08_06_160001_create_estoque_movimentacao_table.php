@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('tipo');
             $table->foreignId('produto_id')->constrained('estoque_produto');
             $table->foreignId('almoxarifado_id')->constrained('estoque_almoxarifado');
+            $table->foreignId('usuario_id')->constrained('estoque_usuario');
             $table->integer('saldo');
             $table->timestamps();
         });
