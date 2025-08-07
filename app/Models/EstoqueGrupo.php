@@ -15,4 +15,9 @@ class EstoqueGrupo extends Model
         'nome',
         'categoria_id'
     ];
+
+    public function categoria()
+    {
+        return $this->belongsTo(EstoqueCategoria::class);
+    }
 }

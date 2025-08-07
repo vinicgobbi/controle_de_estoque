@@ -21,4 +21,19 @@ class EstoqueProduto extends Model
     'grupo_id',
     'unidade_id'
     ];
+
+    public function grupo()
+    {
+        return $this->belongsTo(EstoqueGrupo::class, 'grupo_id');
+    }
+
+    public function unidade()
+    {
+        return $this->belongsTo(EstoqueUnidade::class, 'unidade_id');
+    }
+
+    public function categoria()
+    {
+        return $this->belongsTo(EstoqueCategoria::class, 'categoria_id');
+    }
 }

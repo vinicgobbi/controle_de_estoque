@@ -50,6 +50,7 @@ Route::middleware([AuthMiddleware::class])->group(function () {
 		return view('produto.create_produto', compact('categorias', 'grupos', 'almoxarifados', 'unidades'));
 	})->name('criar-produto');
 	Route::post('/produtos/criar', [ProdutoController::class, 'createProduto'])->name('create-produto'); // URL que cria um produto e salva no banco
+	Route::get('/produtos/filtrar', [ProdutoController::class, 'getProdutoWithFilters'])->name('filtrar-produtos');
 	Route::put('/produtos/{id}', [ProdutoController::class, 'updateProduto'])->name('update-produto'); // URL para editar o produto no banco
 	Route::get('/produtos/{id}/editar', [ProdutoController::class, 'edit'])->name('edit'); // URL que retorna a View para realizar edição
 
@@ -92,5 +93,7 @@ Route::middleware([AuthMiddleware::class])->group(function () {
 		$almoxarifados = EstoqueAlmoxarifado::all();
 		return view('movimentacao.create_movimentacao', compact('produtos', 'almoxarifados'));
 	})->name('criar-movimentacao');
+	Route::get('/movimentacoes/filtrar', [MovimentacaoController::class, 'getMovimentacaoWithFilters'])->name('filtrar-movimentacoes');
+
 
 });

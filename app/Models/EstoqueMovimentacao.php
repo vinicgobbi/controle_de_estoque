@@ -12,6 +12,22 @@ class EstoqueMovimentacao extends Model
         'tipo',
         'produto_id',
         'almoxarifado_id',
+        'usuario_id',
         'saldo'
     ];
+
+    public function produto()
+    {
+        return $this->belongsTo(EstoqueProduto::class);
+    }
+
+    public function almoxarifado()
+    {
+        return $this->belongsTo(EstoqueAlmoxarifado::class);
+    }
+
+    public function usuario()
+    {
+        return $this->belongsTo(EstoqueUsuario::class);
+    }
 }

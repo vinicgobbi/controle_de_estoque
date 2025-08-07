@@ -14,4 +14,13 @@ class EstoqueSaldo extends Model
         'saldo'
     ];
 
+    public function produto()
+    {
+        return $this->belongsTo(EstoqueProduto::class);
+    }
+
+    public function almoxarifado()
+    {
+        return $this->belongsTo(EstoqueAlmoxarifado::class);
+    }
 }
