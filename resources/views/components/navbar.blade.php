@@ -212,6 +212,13 @@
             </a>
         </li>
 
+        <!-- TELA DE MOVIMENTACAO -->
+        <li class="list-group-item rounded-1 p-0 overflow-hidden ">
+            <a href="{{ route('movimentacoes') }}" class="link-agendar d-flex align-items-center gap-2 p-2">
+                <i class="bi bi-arrow-left-right"></i> Movimentação
+            </a>
+        </li>
+
 
         <!-- LOGOUT -->
         <li class="list-group-item mt-auto rounded-1 p-0 overflow-hidden ">

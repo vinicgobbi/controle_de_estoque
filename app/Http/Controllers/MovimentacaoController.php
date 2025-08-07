@@ -15,7 +15,7 @@ class MovimentacaoController extends Controller
         $movimentacoes = EstoqueMovimentacao::all();
         $produtos = EstoqueProduto::all()->toArray();
         $almoxarifados = EstoqueAlmoxarifado::all()->toArray();
-        return view('movimentacao.get_movimentacao', compact('movimentacoes', 'produtos'));
+        return view('movimentacao.get_movimentacao', compact('movimentacoes', 'produtos', 'almoxarifados'));
     }
 
     public function createMovimentacao(Request $request)

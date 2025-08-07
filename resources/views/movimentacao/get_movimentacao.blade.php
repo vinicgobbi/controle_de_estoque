@@ -56,10 +56,13 @@
                             <div class="card h-100 shadow-sm border-0">
                                 <div class="card-body">
                                     <h5 class="card-title text-primary-emphasis">
-                                        <i class="bi bi-diagram-3"></i> {{ $produtos[$movimentacao->produto_id - 1]['nome_prod'] }}
+                                        <i class="bi bi-box-seam"></i> {{ $produtos[$movimentacao->produto_id - 1]['nome_prod'] }}
                                     </h5>
                                     <h5 class="card-subtitle mb-2 text-secondary">
-                                       <i class="bi bi-tags"></i> {{ $movimentacao->tipo }} | {{ $movimentacao->quantidade }}
+                                       <i class="bi bi-building"></i> {{ $almoxarifados[$movimentacao->almoxarifado_id - 1 ]['nome'] }}
+                                    </h5>
+                                    <h5 class="card-subtitle mb-2 text-secondary">
+                                       <i class="bi bi-arrow-left-right"></i> {{ $movimentacao->tipo }} | {{ $movimentacao->saldo }}
                                     </h5>
                                 </div>
                             </div>
