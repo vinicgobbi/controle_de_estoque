@@ -43,7 +43,6 @@ class MovimentacaoController extends Controller
             if (!$saldo) {
                 $saldo = EstoqueSaldo::create($validated);
             }
-            $saldo->saldo += $validated['saldo'];
             EstoqueMovimentacao::create($validated);
         } else {
             if (!$saldo) {
