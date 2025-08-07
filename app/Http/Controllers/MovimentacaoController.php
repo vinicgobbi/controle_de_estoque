@@ -6,6 +6,7 @@ use App\Models\EstoqueAlmoxarifado;
 use App\Models\EstoqueMovimentacao;
 use App\Models\EstoqueProduto;
 use App\Models\EstoqueSaldo;
+use App\Models\EstoqueUsuario;
 use Illuminate\Http\Request;
 
 class MovimentacaoController extends Controller
@@ -13,9 +14,35 @@ class MovimentacaoController extends Controller
     public function getMovimentacao()
     {
         $movimentacoes = EstoqueMovimentacao::all();
-        $produtos = EstoqueProduto::all()->toArray();
-        $almoxarifados = EstoqueAlmoxarifado::all()->toArray();
-        return view('movimentacao.get_movimentacao', compact('movimentacoes', 'produtos', 'almoxarifados'));
+        $produtos = EstoqueProduto::all();
+        $almoxarifados = EstoqueAlmoxarifado::all();
+        $usuarios = EstoqueUsuario::all();
+        return view('movimentacao.get_movimentacao', compact('movimentacoes', 'produtos', 'almoxarifados', 'usuarios'));
+    }
+
+    public function getMovimentacaoWithFilters(Request $request)
+    {
+        $movimentacao = EstoqueMovimentacao::query();
+
+        if ($request->filled('prod')) {
+            $movimentacao->where('produto_id', $request->input('prod'));
+        }
+
+        if ($request->filled('almox')) {
+            $movimentacao->where('almoxarifado_id', $request->input('almox'));
+        }
+
+        if ($request->filled('tipo')) {
+            $movimentacao->where('tipo', $request->input('tipo'));
+        }
+
+        if ($request->filled('user')) {
+            $movimentacao->where('usuario_id', $request->input('user'));
+        }
+
+        $movimentacoes = $movimentacao->with(['produto', 'almoxarifado', 'usuario'])->get();
+
+        return response()->json($movimentacoes);
     }
 
     public function createMovimentacao(Request $request)
@@ -37,7 +64,8 @@ class MovimentacaoController extends Controller
             ->where('almoxarifado_id', $validated['almoxarifado_id'])
             ->first();
 
-        
+
+        $validated['usuario_id'] = session('usuario')->first()->id;
 
         if ($validated['tipo'] == 'Entrada') {
             if (!$saldo) {
