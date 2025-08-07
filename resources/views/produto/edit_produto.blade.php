@@ -144,12 +144,14 @@
                                 <option value="">Selecione...</option>
                                 @foreach ($unidades as $unidade)
                                     <option value="{{ $unidade->id }}" 
-                                        {{ old('unidade_id', $unidade->id) == $unidade->id ? 'selected' : '' }}>
-                                        {{ $unidade->nome }}
+                                        {{ old('unidade_id', $produto->unidade_id ?? '') == $unidade->id ? 'selected' : '' }}>
+                                        {{ $unidade->descricao }} ({{ $unidade->nome }})
                                     </option>
                                 @endforeach
                             </select>
                         </div>
+
+
                         
                         <div class="col-12 mt-3">
                             <button type="submit" class="btn btn-success">

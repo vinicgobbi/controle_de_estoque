@@ -18,11 +18,41 @@ class ProdutoController extends Controller
     public function getProduto()
     {
         $produtos = EstoqueProduto::all();
-        $almoxarifados = EstoqueAlmoxarifado::all()->toArray();
-        $grupos = EstoqueGrupo::all()->toArray();
-        $categorias = EstoqueCategoria::all()->toArray();
-        $unidades = EstoqueUnidade::all()->toArray();
+        $almoxarifados = EstoqueAlmoxarifado::all();
+        $grupos = EstoqueGrupo::all();
+        $categorias = EstoqueCategoria::all();
+        $unidades = EstoqueUnidade::all();
         return view('produto.get_produto', compact('produtos', 'almoxarifados', 'grupos', 'categorias', 'unidades'));
+    }
+
+    public function getProdutoWithFilters(Request $request)
+    {
+        $produto = EstoqueProduto::query();
+
+
+        if ($request->filled('nome_prod')) {
+            $produto->where('nome_prod', 'like', '%' . $request->input('nome_prod') . '%');
+        }
+        
+        if ($request->filled('desc_prod')) {
+            $produto->where('desc_prod', 'like', '%' . $request->input('desc_prod') . '%');
+        }
+
+        if ($request->filled('categoria_id')) {
+            $produto->where('categoria_id', $request->input('categoria_id'));
+        }
+
+        if ($request->filled('grupo_id')) {
+            $produto->where('grupo_id', $request->input('grupo_id'));
+        }
+
+        if ($request->filled('unidade_id')) {
+            $produto->where('unidade_id', $request->input('unidade_id'));
+        }
+
+        $produtos = $produto->with(['grupo', 'unidade', 'categoria'])->get();
+
+        return response()->json($produtos);
     }
 
     public function createProduto(Request $request)
