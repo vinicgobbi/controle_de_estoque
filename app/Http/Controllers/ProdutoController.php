@@ -31,7 +31,6 @@ class ProdutoController extends Controller
             'nome_prod'      => 'required|string|max:50',
             'desc_prod'      => 'nullable|string|max:255',
             'quant_min_prod' => 'nullable|integer|min:0',
-            'almox_id'       => 'required|integer|exists:estoque_almoxarifado,id',
             'categoria_id'   => 'required|integer|exists:estoque_categoria,id',
             'grupo_id'       => 'required|integer|exists:estoque_grupo,id',
             'unidade_id'     => 'required|integer|exists:estoque_unidade,id'
@@ -55,7 +54,6 @@ class ProdutoController extends Controller
             'nome_prod'      => 'required|string|max:50',
             'desc_prod'      => 'nullable|string|max:255',
             'quant_min_prod' => 'nullable|integer|min:0',
-            'almox_id'       => 'required|integer|exists:estoque_almoxarifado,id',
             'categoria_id'   => 'required|integer|exists:estoque_categoria,id',
             'grupo_id'       => 'required|integer|exists:estoque_grupo,id',
             'unidade_id'     => 'required|integer|exists:estoque_unidade,id'

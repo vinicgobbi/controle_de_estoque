@@ -65,11 +65,6 @@
 
                                     <ul class="list-group list-group-flush mt-3 mb-3">
                                         <li class="list-group-item">
-                                            <i class="bi bi-building"></i>
-                                            <strong>Almoxarifado:</strong> 
-                                            <br>{{ $almoxarifados[$produto['almox_id']-1]['nome'] ?? '-' }}
-                                        </li>
-                                        <li class="list-group-item">
                                             <i class="bi bi-puzzle-fill"></i>
                                             <strong>Unidade:</strong> 
                                             <br>  {{ $unidades[$produto['unidade_id']-1]['descricao'] ?? '-' }} ({{ $unidades[$produto['unidade_id']-1]['nome'] ?? '-' }})

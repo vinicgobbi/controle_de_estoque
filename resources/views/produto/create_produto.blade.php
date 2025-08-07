@@ -86,18 +86,6 @@
                         </div>
 
 
-                        <div class="col-md-6">
-                            <label for="almox_id" class="form-label">Almoxarifado <span style="color: red">*</span></label>
-                            <select id="almox_id" name="almox_id" class="form-select">
-                                <option value="">Selecione...</option>
-                                @foreach ($almoxarifados as $almoxarifado)
-                                    <option value="{{ $almoxarifado->id }}" {{ old('almox_id') == $almoxarifado->id ? 'selected' : '' }}>
-                                        {{ $almoxarifado->nome }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-
                         <div class="col-12">
                             <label for="desc_prod" class="form-label">Descrição</label>
                             <input type="text" class="form-control" id="desc_prod" name="desc_prod" value="{{ old('desc_prod') }}">

@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('nome_prod',50);
             $table->string('desc_prod', 255)->nullable();
             $table->integer('quant_min_prod')->default(0);
-            $table->foreignId('almox_id')->constrained('estoque_almoxarifado');
             $table->foreignId('unidade_id')->constrained('estoque_unidade');
             $table->foreignId('categoria_id')->constrained('estoque_categoria');
             $table->foreignId('grupo_id')->constrained('estoque_grupo');
