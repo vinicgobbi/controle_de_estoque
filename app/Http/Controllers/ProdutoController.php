@@ -13,7 +13,9 @@ use Illuminate\Support\Facades\DB;
 
 class ProdutoController extends Controller
 {
-    public function index()
+
+    // GET
+    public function getProduto()
     {
         $produtos = EstoqueProduto::all();
         $almoxarifados = EstoqueAlmoxarifado::all()->toArray();
@@ -21,12 +23,6 @@ class ProdutoController extends Controller
         $categorias = EstoqueCategoria::all()->toArray();
         $unidades = EstoqueUnidade::all()->toArray();
         return view('produto.get_produto', compact('produtos', 'almoxarifados', 'grupos', 'categorias', 'unidades'));
-    }
-
-    // GET
-    public function getProduto()
-    {
-        return EstoqueProduto::all();
     }
 
     public function createProduto(Request $request)

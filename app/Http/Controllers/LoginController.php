@@ -11,7 +11,7 @@ class LoginController extends Controller
         // ARMAZENA LOGIN DE USUARIO E ID DA CLINICA
         $usuario = session('usuario');
         if ($usuario) {
-            return redirect()->route('show');
+            return redirect()->route('produtos');
         } else {
             return redirect()->route('loginGET');
         }

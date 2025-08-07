@@ -19,7 +19,7 @@ Route::middleware([AuthMiddleware::class])->group(function () {
 
     Route::get('/login', function () {
         if (session()->has('usuario')) {
-            return redirect()->route('show');
+            return redirect()->route('produtos');
         }
         return view('login');
     })->name('loginGET');
@@ -32,12 +32,12 @@ Route::middleware([AuthMiddleware::class])->group(function () {
 
 	Route::get('/', function (){
 		if(session()->has('usuario')){
-			return redirect()->route('show');
+			return redirect()->route('produtos');
 		}
 		return view('login');
 	})->name('index');
 
-	Route::get('/show', [ProdutoController::class, 'index'])->name('show');
+	Route::get('/produtos', [ProdutoController::class, 'getProduto'])->name('produtos');
 
 
 
