@@ -11,8 +11,7 @@ class GrupoController extends Controller
     public function getGrupo()
     {
         $grupos = EstoqueGrupo::all();
-        $categorias = EstoqueCategoria::all()->toArray();
-        return view('grupo.get_grupo', compact('grupos', 'categorias'));
+        return view('grupo.get_grupo', compact('grupos'));
     }
 
     public function getGrupoPorCategoria($categoria_id)
@@ -29,7 +28,7 @@ class GrupoController extends Controller
             'categoria_id'      => 'required'
         ],[
             'nome.required'         => 'Digite um nome para o grupo antes de continuar',
-            'categoria_id.required' => 'Selecione uma categoria antes de continuars'
+            'categoria_id.required' => 'Selecione uma categoria antes de continuar'
         ]);
 
         EstoqueGrupo::create($validated);
