@@ -3,13 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\EstoqueAlmoxarifado;
+use App\Services\AlmoxarifadoService;
 use Illuminate\Http\Request;
 
 class AlmoxarifadoController extends Controller
 {
+    protected $almoxarifadoService;
+
+    public function __construct()
+    {
+        $this->almoxarifadoService = new AlmoxarifadoService();
+    }
+
     public function getAlmoxarifado()
     {
-        $almoxarifados = EstoqueAlmoxarifado::all();
+        $almoxarifados = $this->almoxarifadoService->getAlmoxarifados();
         return view('almoxarifado.get_almoxarifado', compact('almoxarifados'));
     }
 
@@ -21,7 +29,7 @@ class AlmoxarifadoController extends Controller
             'nome.required' =>  'Insira um nome para o almoxarifado antes de continuar',
         ]);
 
-        EstoqueAlmoxarifado::create($validated);
+        $this->almoxarifadoService->createAlmoxarifado($validated);
 
         return redirect()->route('almoxarifados');  
     }
